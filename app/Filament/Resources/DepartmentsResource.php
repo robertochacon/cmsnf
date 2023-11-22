@@ -6,18 +6,23 @@ use App\Filament\Resources\DepartmentsResource\Pages;
 use App\Filament\Resources\DepartmentsResource\RelationManagers;
 use App\Models\Departments;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class DepartmentsResource extends Resource
 {
     protected static ?string $model = Departments::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
 
     protected static ?string $navigationGroup = 'Maintenance';
 
@@ -26,6 +31,8 @@ class DepartmentsResource extends Resource
         return $form
             ->schema([
                 //
+                TextInput::make('name')->required(),
+                Toggle::make('status')
             ]);
     }
 
@@ -34,6 +41,10 @@ class DepartmentsResource extends Resource
         return $table
             ->columns([
                 //
+                TextColumn::make('name')
+                ->searchable(),
+                TextColumn::make('created_at')->since(),
+                ToggleColumn::make('status')
             ])
             ->filters([
                 //
@@ -43,6 +54,7 @@ class DepartmentsResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make(),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);

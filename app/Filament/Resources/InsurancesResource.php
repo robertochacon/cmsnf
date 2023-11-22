@@ -6,18 +6,23 @@ use App\Filament\Resources\InsurancesResource\Pages;
 use App\Filament\Resources\InsurancesResource\RelationManagers;
 use App\Models\Insurances;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class InsurancesResource extends Resource
 {
     protected static ?string $model = Insurances::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
     protected static ?string $navigationGroup = 'Maintenance';
 
@@ -26,6 +31,9 @@ class InsurancesResource extends Resource
         return $form
             ->schema([
                 //
+                TextInput::make('name')->required(),
+                TextInput::make('phone'),
+                Toggle::make('status')
             ]);
     }
 
@@ -34,6 +42,11 @@ class InsurancesResource extends Resource
         return $table
             ->columns([
                 //
+                TextColumn::make('name')
+                ->searchable(),
+                TextColumn::make('phone')->default('N/A'),
+                TextColumn::make('created_at')->since(),
+                ToggleColumn::make('status')
             ])
             ->filters([
                 //
@@ -43,6 +56,7 @@ class InsurancesResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make(),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
