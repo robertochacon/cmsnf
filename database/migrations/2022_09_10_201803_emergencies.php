@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class MedicalConsultations extends Migration
+class Emergencies extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class MedicalConsultations extends Migration
      */
     public function up()
     {
-        Schema::create('medical_consultations', function (Blueprint $table) {
+        Schema::create('emergencies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('department_id')->nullable();
             $table->foreign('department_id')->references('id')->on('departments');
@@ -49,6 +49,6 @@ class MedicalConsultations extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medical_consultations');
+        Schema::dropIfExists('emergencies');
     }
 }
