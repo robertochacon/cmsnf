@@ -72,9 +72,7 @@ class InstitutionsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListInstitutions::route('/'),
-            'create' => Pages\CreateInstitutions::route('/create'),
-            'edit' => Pages\EditInstitutions::route('/{record}/edit'),
+            'index' => Pages\ManageInstitutions::route('/'),
         ];
     }
 }

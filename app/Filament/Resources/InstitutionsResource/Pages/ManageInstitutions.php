@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\InstitutionsResource\Pages;
+namespace App\Filament\Resources\InstitutionsResource\pages;
 
 use App\Filament\Resources\InstitutionsResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\ManageRecords;
 
-class ListInstitutions extends ListRecords
+class ManageInstitutions extends ManageRecords
 {
     protected static string $resource = InstitutionsResource::class;
 

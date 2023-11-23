@@ -33,6 +33,7 @@ class InsurancesResource extends Resource
                 //
                 TextInput::make('name')->required(),
                 TextInput::make('phone'),
+                TextInput::make('coverage')->prefix('%')->numeric()->minValue(0)->maxValue(100),
                 Toggle::make('status')
             ]);
     }
@@ -45,6 +46,7 @@ class InsurancesResource extends Resource
                 TextColumn::make('name')
                 ->searchable(),
                 TextColumn::make('phone')->default('N/A'),
+                TextColumn::make('coverage')->prefix('%'),
                 TextColumn::make('created_at')->since(),
                 ToggleColumn::make('status')
             ])
@@ -72,9 +74,7 @@ class InsurancesResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListInsurances::route('/'),
-            'create' => Pages\CreateInsurances::route('/create'),
-            'edit' => Pages\EditInsurances::route('/{record}/edit'),
+            'index' => Pages\ManageInsurances::route('/'),
         ];
     }
 }

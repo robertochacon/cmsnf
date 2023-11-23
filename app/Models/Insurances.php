@@ -9,6 +9,6 @@ class Insurances extends Model
     protected $table = 'insurances';
 
     protected $fillable = [
-        'user_id','name','phone','status'
+        'user_id','name','phone','coverage','status'
     ];
 }

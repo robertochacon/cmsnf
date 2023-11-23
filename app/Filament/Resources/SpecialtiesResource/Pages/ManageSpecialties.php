@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Filament\Resources\SpecialtiesResource\Pages;
+namespace App\Filament\Resources\SpecialtiesResource\pages;
 
 use App\Filament\Resources\SpecialtiesResource;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\ManageRecords;
 
-class EditSpecialties extends EditRecord
+class ManageSpecialties extends ManageRecords
 {
     protected static string $resource = SpecialtiesResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\CreateAction::make(),
         ];
     }
 }

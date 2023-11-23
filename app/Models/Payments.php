@@ -9,6 +9,6 @@ class Payments extends Model
     protected $table = 'payments';
 
     protected $fillable = [
-        'user_id','department_id','identification','insurance','description','total','status'
+        'user_id','department_id','identification','name','insurance','description','coverage','cost','total','status'
     ];
 }

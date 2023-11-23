@@ -15,9 +15,9 @@ class Insurances extends Seeder
     public function run()
     {
         DB::table('insurances')->insert([
-            ['name' => 'SIN SEGURO', 'created_at' => date("Y-m-d H:i:s")],
-            ['name' => 'ARS SENASA', 'created_at' => date("Y-m-d H:i:s")],
-            ['name' => 'ARS HUMANO', 'created_at' => date("Y-m-d H:i:s")],
+            ['name' => 'SIN SEGURO', 'coverage' => 0, 'created_at' => date("Y-m-d H:i:s")],
+            ['name' => 'ARS SENASA', 'coverage' => 50, 'created_at' => date("Y-m-d H:i:s")],
+            ['name' => 'ARS HUMANO', 'coverage' => 50, 'created_at' => date("Y-m-d H:i:s")],
         ]);
     }
 }

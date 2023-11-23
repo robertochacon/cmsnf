@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\ProfessionsResource\Pages;
+namespace App\Filament\Resources\ProfessionsResource\pages;
 
 use App\Filament\Resources\ProfessionsResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\ManageRecords;
 
-class ListProfessions extends ListRecords
+class ManageProfessions extends ManageRecords
 {
     protected static string $resource = ProfessionsResource::class;
 

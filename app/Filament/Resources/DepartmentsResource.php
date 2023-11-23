@@ -70,9 +70,7 @@ class DepartmentsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDepartments::route('/'),
-            'create' => Pages\CreateDepartments::route('/create'),
-            'edit' => Pages\EditDepartments::route('/{record}/edit'),
+            'index' => Pages\ManageDepartments::route('/'),
         ];
     }
 }

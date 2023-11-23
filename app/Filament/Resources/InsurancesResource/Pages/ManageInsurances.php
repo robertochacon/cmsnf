@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Filament\Resources\InsurancesResource\Pages;
+namespace App\Filament\Resources\InsurancesResource\pages;
 
 use App\Filament\Resources\InsurancesResource;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\ManageRecords;
 
-class EditInsurances extends EditRecord
+class ManageInsurances extends ManageRecords
 {
     protected static string $resource = InsurancesResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\CreateAction::make(),
         ];
     }
 }

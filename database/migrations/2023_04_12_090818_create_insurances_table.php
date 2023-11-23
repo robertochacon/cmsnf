@@ -19,6 +19,7 @@ class CreateInsurancesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
+            $table->integer('coverage')->default(50)->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

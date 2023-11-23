@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\PaymentsResource\Pages;
+namespace App\Filament\Resources\PaymentsResource\pages;
 
 use App\Filament\Resources\PaymentsResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\ManageRecords;
 
-class ListPayments extends ListRecords
+class ManagePayments extends ManageRecords
 {
     protected static string $resource = PaymentsResource::class;
 

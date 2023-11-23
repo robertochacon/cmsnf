@@ -70,9 +70,7 @@ class ProfessionsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProfessions::route('/'),
-            'create' => Pages\CreateProfessions::route('/create'),
-            'edit' => Pages\EditProfessions::route('/{record}/edit'),
+            'index' => Pages\ManageProfessions::route('/'),
         ];
     }
 }

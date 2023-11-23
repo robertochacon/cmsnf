@@ -70,9 +70,7 @@ class SpecialtiesResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSpecialties::route('/'),
-            'create' => Pages\CreateSpecialties::route('/create'),
-            'edit' => Pages\EditSpecialties::route('/{record}/edit'),
+            'index' => Pages\ManageSpecialties::route('/'),
         ];
     }
 }

@@ -20,9 +20,12 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('identification')->nullable();
+            $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->string('insurance')->nullable();
-            $table->string('total')->nullable();
+            $table->string('coverage')->nullable();
+            $table->float('cost')->nullable();
+            $table->float('total')->nullable();
             $table->enum('status',['Efectivo','Tarjeta'])->default('Efectivo');
             $table->timestamps();
         });
