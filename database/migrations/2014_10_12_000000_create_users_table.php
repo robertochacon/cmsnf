@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('type', ['user', 'admin', 'super'])->default('user');
+            $table->enum('type', ['user', 'doctor', 'admin', 'super'])->default('user');
             $table->boolean('approved')->default(0)->nullable();
             $table->boolean('verified')->default(0)->nullable();
             $table->datetime('verified_at')->nullable();

@@ -41,6 +41,7 @@ class UsersResource extends Resource
                 Select::make('type')
                     ->options([
                         'user' => 'User',
+                        'doctor' => 'Doctor',
                         'admin' => 'Admin',
                         'super' => 'Super admin',
                     ])
