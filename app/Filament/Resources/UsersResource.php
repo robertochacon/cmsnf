@@ -57,7 +57,7 @@ class UsersResource extends Resource
                 ->searchable(),
                 TextColumn::make('email')
                 ->searchable(),
-                TextColumn::make('email_verified_at'),
+                // TextColumn::make('email_verified_at'),
                 CheckboxColumn::make('approved'),
                 CheckboxColumn::make('verified'),
                 TextColumn::make('type'),
@@ -81,7 +81,9 @@ class UsersResource extends Resource
                     $user->email_verified_at = null;
                     $user->verified = false;
                     $user->save();
-                })
+                }),
+                Tables\Actions\DeleteAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

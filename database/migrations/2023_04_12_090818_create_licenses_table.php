@@ -20,11 +20,12 @@ class CreateLicensesTable extends Migration
             $table->string('name')->nullable();
             $table->string('identification')->unique();
             $table->string('range')->nullable();
-            $table->string('age')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('days')->nullable();
             $table->string('diagnostic')->unique();
+            $table->date('date_start')->unique();
+            $table->date('date_end')->unique();
             $table->enum('status',['Recibida','Aprobada','Rechazada'])->default('Recibida');
             $table->timestamps();
         });

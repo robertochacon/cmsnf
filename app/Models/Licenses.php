@@ -9,6 +9,6 @@ class Licenses extends Model
     protected $table = 'licenses';
 
     protected $fillable = [
-        'user_id','name', 'identification', 'age','phone','range','address','days','diagnostic','status'
+        'user_id','identification','name','phone','range','address','days','diagnostic','date_start','date_end','status'
     ];
 }
