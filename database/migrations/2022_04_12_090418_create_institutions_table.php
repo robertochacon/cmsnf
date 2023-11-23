@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Insurances extends Migration
+class CreateInstitutionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class Insurances extends Migration
      */
     public function up()
     {
-        Schema::create('insurances', function (Blueprint $table) {
+        Schema::create('institutions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
-            $table->enum('status',['Activo','Inactivo'])->default('Activo');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class Insurances extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('insurances');
+        Schema::dropIfExists('institutions');
     }
 }

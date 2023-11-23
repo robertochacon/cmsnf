@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\InsurancesResource\Pages;
-use App\Filament\Resources\InsurancesResource\RelationManagers;
-use App\Models\Insurances;
+use App\Filament\Resources\InstitutionsResource\Pages;
+use App\Filament\Resources\InstitutionsResource\RelationManagers;
+use App\Models\Institutions;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -18,11 +18,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
-class InsurancesResource extends Resource
+class InstitutionsResource extends Resource
 {
-    protected static ?string $model = Insurances::class;
+    protected static ?string $model = Institutions::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-building-library';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
     protected static ?string $navigationGroup = 'Maintenance';
 
@@ -72,9 +72,9 @@ class InsurancesResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListInsurances::route('/'),
-            'create' => Pages\CreateInsurances::route('/create'),
-            'edit' => Pages\EditInsurances::route('/{record}/edit'),
+            'index' => Pages\ListInstitutions::route('/'),
+            'create' => Pages\CreateInstitutions::route('/create'),
+            'edit' => Pages\EditInstitutions::route('/{record}/edit'),
         ];
     }
 }

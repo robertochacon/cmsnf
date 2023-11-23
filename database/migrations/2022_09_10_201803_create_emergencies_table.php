@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Emergencies extends Migration
+class CreateEmergenciesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -35,8 +35,7 @@ class Emergencies extends Migration
             $table->text('plan')->nullable();
             $table->text('medicine')->nullable();
             $table->text('details')->nullable();
-            $table->text('Transfer')->nullable();
-            $table->enum('type',['consultation','emergency'])->default('consultation');
+            $table->text('transfer')->nullable();
             $table->enum('status',['Atendiendo','Atendida'])->default('Atendiendo');
             $table->timestamps();
         });
