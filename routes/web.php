@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DownloadPdfController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,5 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return redirect('/admin/login');
 })->name('login');
+
+Route::get('/{record}/pdf', [DownloadPdfController::class, 'download'])->name('licenses.pdf.download');

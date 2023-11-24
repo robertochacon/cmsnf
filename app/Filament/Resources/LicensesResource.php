@@ -108,6 +108,10 @@ class LicensesResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('Download')
+                ->icon('heroicon-o-arrow-down-on-square-stack')
+                ->url(fn(Licenses $record) => route('licenses.pdf.download', $record))
+                ->openUrlInNewTab(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
