@@ -74,4 +74,10 @@ class ProfessionsResource extends Resource
             'index' => Pages\ManageProfessions::route('/'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
 }

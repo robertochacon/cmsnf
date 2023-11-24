@@ -78,4 +78,10 @@ class InsurancesResource extends Resource
             'index' => Pages\ManageInsurances::route('/'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
 }

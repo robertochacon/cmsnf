@@ -74,4 +74,10 @@ class SpecialtiesResource extends Resource
             'index' => Pages\ManageSpecialties::route('/'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
 }

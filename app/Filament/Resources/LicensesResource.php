@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -71,6 +72,12 @@ class LicensesResource extends Resource
                         }
                     }),
                     TextInput::make('days')->numeric()->readOnly(),
+                    Select::make('status')
+                    ->options([
+                        'Recibida' => 'Recibida',
+                        'Aprobada' => 'Aprobada',
+                        'Rechazada' => 'Rechazada',
+                    ])->visibleOn('edit')
                 ])
             ]);
     }
@@ -88,6 +95,13 @@ class LicensesResource extends Resource
                 TextColumn::make('days'),
                 TextColumn::make('date_start'),
                 TextColumn::make('date_end'),
+                TextColumn::make('status')
+                ->badge()
+                ->color(fn (string $state): string => match ($state) {
+                    'Recibida' => 'gray',
+                    'Aprobada' => 'success',
+                    'Rechazada' => 'danger',
+                }),
                 TextColumn::make('created_at')->since(),
             ])
             ->filters([

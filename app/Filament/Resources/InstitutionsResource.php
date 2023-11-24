@@ -76,4 +76,10 @@ class InstitutionsResource extends Resource
             'index' => Pages\ManageInstitutions::route('/'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
 }
