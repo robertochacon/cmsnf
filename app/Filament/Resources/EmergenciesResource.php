@@ -46,11 +46,20 @@ class EmergenciesResource extends Resource
                     }),
                     TextInput::make('name')->readOnly(),
                 ])->columns(2),
+                Section::make('Signos Vitales')
+                ->schema([
+                    TextInput::make('ta')->label('TA'),
+                    TextInput::make('fc')->label('FC'),
+                    TextInput::make('fr')->label('FR'),
+                    TextInput::make('temp')->label('TEMP'),
+                ])->columns(4),
                 Section::make('Información de emergencia')
                 ->schema([
                     Textarea::make('reason')->label('Motivo'),
                     Textarea::make('background')->label('Antecedentes'),
-                ])->columns(2)
+                    Textarea::make('physical_exam')->label('Examen Fisico'),
+                    Textarea::make('observations')->label('Observaciones'),
+                ])->columns(2),
             ]);
     }
 

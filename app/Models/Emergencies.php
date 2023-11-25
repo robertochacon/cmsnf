@@ -9,7 +9,7 @@ class Emergencies extends Model
     protected $table = 'emergencies';
 
     protected $fillable = [
-        'user_id','patient_id','identification','reason','background', 'ta', 'fc','fr','temp','physical_exam','observations','laboratory','diagnosis','plan','medicine','details','Transfer','type','status'
+        'user_id','patient_id','identification','reason','background', 'ta', 'fc','fr','temp','physical_exam','observations','laboratory','diagnosis','plan','medicine','details','Transfer','status'
     ];
 
     public function patient()
