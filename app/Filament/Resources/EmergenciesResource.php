@@ -5,13 +5,20 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\EmergenciesResource\Pages;
 use App\Filament\Resources\EmergenciesResource\RelationManagers;
 use App\Models\Emergencies;
+use App\Models\Patients;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class EmergenciesResource extends Resource
 {
@@ -25,7 +32,25 @@ class EmergenciesResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Section::make('Información del paciente')
+                ->schema([
+                    Select::make('patient_id')->label('Buscar paciente por identificacion')
+                    ->options(Patients::all()->pluck('identification', 'id'))
+                    ->searchable()
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $set){
+                        $patient = Patients::find($state);
+                        if ($patient) {
+                            $set('name', $patient->name);
+                        }
+                    }),
+                    TextInput::make('name')->readOnly(),
+                ])->columns(2),
+                Section::make('Información de emergencia')
+                ->schema([
+                    Textarea::make('reason')->label('Motivo'),
+                    Textarea::make('background')->label('Antecedentes'),
+                ])->columns(2)
             ]);
     }
 
@@ -33,20 +58,25 @@ class EmergenciesResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                ->searchable(),
+                TextColumn::make('created_at')->since(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make(),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
+
 
     public static function getRelations(): array
     {
