@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PatientsResource\Pages;
 use App\Filament\Resources\PatientsResource\RelationManagers;
+use App\Models\Institutions;
 use App\Models\Patients;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
@@ -42,13 +44,20 @@ class PatientsResource extends Resource
                         ->schema([
                             Section::make()
                             ->schema([
-                                TextInput::make('institution'),
+                                Select::make('institution')
+                                ->options(Institutions::all()->pluck('name', 'id'))
+                                ->searchable(),
                                 TextInput::make('range'),
                                 TextInput::make('identification')->required(),
                                 TextInput::make('name')->required(),
                                 TextInput::make('phone')->numeric(),
                                 TextInput::make('age')->numeric(),
-                                TextInput::make('sexo')->numeric(),
+                                Select::make('sexo')->label('Genero')
+                                ->options([
+                                    'Masculino' => 'Masculino',
+                                    'Femenino' => 'Femenino',
+                                ])
+                                ->searchable(),
                                 TextInput::make('blood'),
                                 Textarea::make('address'),
                             ])
@@ -62,7 +71,9 @@ class PatientsResource extends Resource
                             ->schema([
                                 Repeater::make('military_family')
                                 ->schema([
-                                    TextInput::make('institution'),
+                                    Select::make('institution')
+                                    ->options(Institutions::all()->pluck('name', 'id'))
+                                    ->searchable(),
                                     TextInput::make('range'),
                                     TextInput::make('name'),
                                 ])
@@ -104,7 +115,6 @@ class PatientsResource extends Resource
                 TextColumn::make('blood')->default('N/A'),
                 TextColumn::make('phone')->default('N/A'),
                 TextColumn::make('created_at')->since(),
-                ToggleColumn::make('status')
             ])
             ->filters([
                 //

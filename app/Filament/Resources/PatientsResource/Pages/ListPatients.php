@@ -28,7 +28,7 @@ class ListPatients extends ListRecords
             'Militares' => Tab::make()
                 ->modifyQueryUsing(fn (Builder $query) => $query->whereNotNull('range'))
                 ->badge(Patients::query()->whereNotNull('range')->count()),
-            'Civil' => Tab::make()
+            'Civiles' => Tab::make()
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('range',null))
                 ->badge(Patients::query()->where('range',null)->count()),
         ];

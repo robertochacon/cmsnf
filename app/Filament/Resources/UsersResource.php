@@ -4,8 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UsersResource\Pages;
 use App\Filament\Resources\UsersResource\RelationManagers;
+use App\Models\Departments;
+use App\Models\Institutions;
+use App\Models\Professions;
+use App\Models\Specialties;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -34,18 +39,42 @@ class UsersResource extends Resource
     {
         return $form
             ->schema([
-                //
-                TextInput::make('name')->required(),
-                TextInput::make('email')->required()->email(),
-                TextInput::make('password')->required()->password()->hiddenOn('edit'),
-                Select::make('type')
-                    ->options([
-                        'user' => 'User',
-                        'doctor' => 'Doctor',
-                        'admin' => 'Admin',
-                        'super' => 'Super admin',
-                    ])
-                    ->preload()
+                Section::make('Información personal')
+                ->schema([
+                    TextInput::make('name')->required(),
+                    TextInput::make('email')->required()->email(),
+                    TextInput::make('password')->required()->password()->hiddenOn('edit'),
+                    TextInput::make('phone')->numeric(),
+                    Select::make('sexo')->label('Genero')
+                        ->options([
+                            'Masculino' => 'Masculino',
+                            'Femenino' => 'Femenino',
+                        ]),
+                ])->columns(3),
+                Section::make('Información profesional')
+                ->schema([
+                    Select::make('institution')
+                        ->options(Institutions::all()->pluck('name', 'id'))
+                        ->searchable(),
+                    TextInput::make('range'),
+                    Select::make('department')
+                        ->options(Departments::all()->pluck('name', 'id'))
+                        ->searchable(),
+                    Select::make('profession')
+                        ->options(Professions::all()->pluck('name', 'id'))
+                        ->searchable(),
+                    Select::make('specialty')
+                        ->options(Specialties::all()->pluck('name', 'id'))
+                        ->searchable(),
+                    Select::make('type')
+                        ->options([
+                            'user' => 'User',
+                            'doctor' => 'Doctor',
+                            'admin' => 'Admin',
+                            'super' => 'Super admin',
+                        ])
+                        ->preload()
+                ])->columns(3)
             ]);
     }
 
