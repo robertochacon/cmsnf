@@ -43,7 +43,7 @@ class PatientsResource extends Resource
                             Section::make()
                             ->schema([
                                 TextInput::make('institution'),
-                                TextInput::make('rango'),
+                                TextInput::make('range'),
                                 TextInput::make('identification')->required(),
                                 TextInput::make('name')->required(),
                                 TextInput::make('phone')->numeric(),
@@ -54,17 +54,17 @@ class PatientsResource extends Resource
                             ])
                             ->columns(3),
                     ]),
-                    Wizard\Step::make('Información militar')
+                    Wizard\Step::make('Información de familia militar')
                         ->icon('heroicon-m-clipboard-document-list')
-                        ->description('Información militar del paciente')
+                        ->description('Información de familiares militar del paciente')
                         ->schema([
                             Section::make('Familiar militar')
                             ->schema([
                                 Repeater::make('military_family')
                                 ->schema([
-                                    TextInput::make('Institucion'),
-                                    TextInput::make('Rango'),
-                                    TextInput::make('Nombre'),
+                                    TextInput::make('institution'),
+                                    TextInput::make('range'),
+                                    TextInput::make('name'),
                                 ])
                                 ->columns(3)
                             ])
@@ -99,7 +99,7 @@ class PatientsResource extends Resource
                 ->searchable(),
                 TextColumn::make('name')
                 ->searchable(),
-                TextColumn::make('rango')->default('N/A'),
+                TextColumn::make('range')->default('N/A'),
                 TextColumn::make('age')->default('N/A'),
                 TextColumn::make('blood')->default('N/A'),
                 TextColumn::make('phone')->default('N/A'),
