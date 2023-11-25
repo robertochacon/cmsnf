@@ -25,14 +25,9 @@ class CreatePatientsTable extends Migration
             $table->string('age')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('allergic')->nullable();
             $table->string('blood')->nullable();
-            $table->boolean('have_parent')->nullable();
-            $table->string('parent_range')->nullable();
-            $table->string('parent_name')->nullable();
-            $table->string('parent_intitution')->nullable();
-            $table->text('apf')->nullable();
-            $table->text('app')->nullable();
+            $table->json('military_family')->nullable();
+            $table->json('history')->nullable();
             $table->enum('status',['Activo','Inactivo'])->default('Activo');
             $table->timestamps();
         });

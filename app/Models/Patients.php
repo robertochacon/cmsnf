@@ -8,8 +8,13 @@ class Patients extends Model
 {
     protected $table = 'patients';
 
+    protected $casts = [
+        'military_family' => 'array',
+        'history' => 'array',
+    ];
+
     protected $fillable = [
-        'user_id', 'sexo', 'institution', 'name', 'identification', 'age','phone','range','address','allergic','blood','have_parent','parent_range','parent_name','parent_intitution','apf','app'
+        'user_id', 'sexo', 'institution', 'name', 'identification', 'age','phone','range','address','blood','military_family','history'
     ];
 
     public function medicalconsultations()
