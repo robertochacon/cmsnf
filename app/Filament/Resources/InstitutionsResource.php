@@ -44,8 +44,8 @@ class InstitutionsResource extends Resource
                 //
                 TextColumn::make('name')
                 ->searchable(),
-                TextColumn::make('phone')->default('N/A'),
-                TextColumn::make('created_at')->since(),
+                // TextColumn::make('phone')->default('N/A'),
+                // TextColumn::make('created_at')->since(),
                 ToggleColumn::make('status')
             ])
             ->filters([
