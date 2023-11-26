@@ -12,6 +12,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -41,11 +42,13 @@ class EmergenciesResource extends Resource
                     ->afterStateUpdated(function ($state, callable $set){
                         $patient = Patients::find($state);
                         if ($patient) {
+                            $set('identification', $patient->identification);
                             $set('name', $patient->name);
                         }
                     }),
+                    TextInput::make('identification')->readOnly(),
                     TextInput::make('name')->readOnly(),
-                ])->columns(2),
+                ])->columns(3),
                 Section::make('Signos Vitales')
                 ->schema([
                     TextInput::make('ta')->label('TA'),
@@ -66,12 +69,21 @@ class EmergenciesResource extends Resource
                 Section::make()
                 ->schema([
                     Textarea::make('details')->label('Detalles de emergencia'),
+                    Select::make('status')
+                    ->options([
+                        'Atendiendo' => 'Atendiendo',
+                        'Atendida' => 'Atendida',
+                        'Traslado' => 'Traslado',
+                    ])
+                    ->live()
+                    ->searchable(),
                 ])->columns(1),
                 Section::make('Información de traslado')
                 ->schema([
                     TextInput::make('hospital')->label('Hospital'),
                     Textarea::make('reason')->label('Motivo'),
-                ])->columns(2),
+                ])->columns(2)
+                ->hidden(fn (Get $get): bool => $get('status') != 'Traslado'),
             ]);
     }
 
@@ -79,7 +91,11 @@ class EmergenciesResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('identification')
+                ->searchable(),
                 TextColumn::make('name')
+                ->searchable(),
+                TextColumn::make('user.name')
                 ->searchable(),
                 TextColumn::make('created_at')->since(),
             ])

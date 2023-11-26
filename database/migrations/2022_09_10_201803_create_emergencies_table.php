@@ -22,6 +22,7 @@ class CreateEmergenciesTable extends Migration
             $table->unsignedBigInteger('patient_id')->nullable();
             $table->foreign('patient_id')->references('id')->on('patients');
             $table->string('identification')->nullable();
+            $table->string('name')->nullable();
             $table->string('reason')->nullable();
             $table->text('background')->nullable();
             $table->text('ta')->nullable();
@@ -36,7 +37,7 @@ class CreateEmergenciesTable extends Migration
             $table->text('medicine')->nullable();
             $table->text('details')->nullable();
             $table->text('transfer')->nullable();
-            $table->enum('status',['Atendiendo','Atendida'])->default('Atendiendo');
+            $table->enum('status',['Atendiendo','Atendida','Traslado'])->default('Atendiendo');
             $table->timestamps();
         });
     }

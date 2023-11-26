@@ -9,11 +9,16 @@ class Emergencies extends Model
     protected $table = 'emergencies';
 
     protected $fillable = [
-        'user_id','patient_id','identification','reason','background', 'ta', 'fc','fr','temp','physical_exam','observations','laboratory','diagnosis','plan','medicine','details','Transfer','status'
+        'user_id','patient_id','identification','name','reason','background', 'ta', 'fc','fr','temp','physical_exam','observations','laboratory','diagnosis','plan','medicine','details','Transfer','status'
     ];
 
     public function patient()
     {
     	return $this->belongsTo('App\Models\Patients', 'patient_id');
+    }
+
+    public function user()
+    {
+    	return $this->belongsTo('App\Models\User', 'user_id');
     }
 }

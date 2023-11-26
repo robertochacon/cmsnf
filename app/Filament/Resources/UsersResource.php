@@ -73,7 +73,7 @@ class UsersResource extends Resource
                             'admin' => 'Admin',
                             'super' => 'Super admin',
                         ])
-                        ->preload()
+                        ->searchable(),
                 ])->columns(3)
             ]);
     }

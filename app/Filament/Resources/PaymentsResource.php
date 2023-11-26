@@ -66,7 +66,7 @@ class PaymentsResource extends Resource
                         'Efectivo' => 'Efectivo',
                         'Tarjeta' => 'Tarjeta',
                     ])
-                    ->preload()
+                    ->searchable()
             ]);
     }
 
