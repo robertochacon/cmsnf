@@ -36,7 +36,8 @@ class CreateEmergenciesTable extends Migration
             $table->text('plan')->nullable();
             $table->text('medicine')->nullable();
             $table->text('details')->nullable();
-            $table->text('transfer')->nullable();
+            $table->text('hospital_transfer')->nullable();
+            $table->text('reason_transfer')->nullable();
             $table->enum('status',['Atendiendo','Atendida','Traslado'])->default('Atendiendo');
             $table->timestamps();
         });

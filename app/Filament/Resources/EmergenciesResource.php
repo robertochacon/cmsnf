@@ -80,8 +80,8 @@ class EmergenciesResource extends Resource
                 ])->columns(1),
                 Section::make('Información de traslado')
                 ->schema([
-                    TextInput::make('hospital')->label('Hospital'),
-                    Textarea::make('reason')->label('Motivo'),
+                    TextInput::make('hospital_transfer')->label('Hospital'),
+                    Textarea::make('reason_transfer')->label('Motivo'),
                 ])->columns(2)
                 ->hidden(fn (Get $get): bool => $get('status') != 'Traslado'),
             ]);
@@ -97,6 +97,13 @@ class EmergenciesResource extends Resource
                 ->searchable(),
                 TextColumn::make('user.name')
                 ->searchable(),
+                TextColumn::make('status')
+                ->badge()
+                ->color(fn (string $state): string => match ($state) {
+                    'Atendiendo' => 'info',
+                    'Atendida' => 'success',
+                    'Traslado' => 'warning',
+                }),
                 TextColumn::make('created_at')->since(),
             ])
             ->filters([
