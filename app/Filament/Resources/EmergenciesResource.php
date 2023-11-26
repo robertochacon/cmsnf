@@ -58,7 +58,19 @@ class EmergenciesResource extends Resource
                     Textarea::make('reason')->label('Motivo'),
                     Textarea::make('background')->label('Antecedentes'),
                     Textarea::make('physical_exam')->label('Examen Fisico'),
-                    Textarea::make('observations')->label('Observaciones'),
+                    Textarea::make('observations')->label('Observaciónes'),
+                    Textarea::make('laboratory')->label('Laboratorio/Imagen'),
+                    Textarea::make('diagnosis')->label('Diagnóstico'),
+                    Textarea::make('medicine')->label('Medicamentos suministrados'),
+                ])->columns(2),
+                Section::make()
+                ->schema([
+                    Textarea::make('details')->label('Detalles de emergencia'),
+                ])->columns(1),
+                Section::make('Información de traslado')
+                ->schema([
+                    TextInput::make('hospital')->label('Hospital'),
+                    Textarea::make('reason')->label('Motivo'),
                 ])->columns(2),
             ]);
     }
