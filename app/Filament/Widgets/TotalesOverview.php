@@ -24,28 +24,34 @@ class TotalesOverview extends BaseWidget
         $payments = Payments::get()->count();
 
         return [
-            Stat::make('Total pacientes', $patients)
-                ->descriptionIcon('heroicon-m-user')
+            Stat::make('Pacientes', $patients)
+                ->description('Total de registros de pacientes')
+                ->descriptionIcon('heroicon-m-users')
                 ->color('info')
                 ->chart([1,1]),
             Stat::make('Total consultas', $consultations)
-                ->descriptionIcon('heroicon-m-arrow-trending-up')
+                ->description('Total de registros de consultas')
+                ->descriptionIcon('heroicon-m-clipboard-document-list')
                 ->color('info')
                 ->chart([1,1]),
             Stat::make('Total prescripciones', $prescriptions)
-                ->descriptionIcon('heroicon-m-arrow-trending-up')
+                ->description('Total de registros de prescripciones')
+                ->descriptionIcon('heroicon-m-clipboard-document-list')
                 ->color('info')
                 ->chart([1,1]),
             Stat::make('Total de emergencias', $emergencies)
-                ->descriptionIcon('heroicon-m-arrow-trending-up')
+                ->description('Total de registros de emergencias')
+                ->descriptionIcon('heroicon-m-document-plus')
                 ->color('info')
                 ->chart([1,1]),
             Stat::make('Total de licencias', $licenses)
-                ->descriptionIcon('heroicon-m-arrow-trending-up')
+                ->description('Total de registros de licencias')
+                ->descriptionIcon('heroicon-m-clipboard-document-list')
                 ->color('info')
                 ->chart([1,1]),
             Stat::make('Total de pagos', $payments)
-                ->descriptionIcon('heroicon-m-arrow-trending-up')
+                ->description('Total de registros de pagos')
+                ->descriptionIcon('heroicon-m-currency-dollar')
                 ->color('info')
                 ->chart([1,1]),
         ];
