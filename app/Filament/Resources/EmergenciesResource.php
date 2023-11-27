@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\EmergenciesResource\Pages;
 use App\Models\Emergencies;
 use App\Models\Patients;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -42,7 +43,7 @@ class EmergenciesResource extends Resource
                             $set('name', $patient->name);
                         }
                     }),
-                    TextInput::make('identification')->readOnly(),
+                    Hidden::make('identification'),
                     TextInput::make('name')->readOnly(),
                 ])->columns(3),
                 Section::make('Signos Vitales')
@@ -54,18 +55,19 @@ class EmergenciesResource extends Resource
                 ])->columns(4),
                 Section::make('Información de emergencia')
                 ->schema([
-                    Textarea::make('reason')->label('Motivo'),
-                    Textarea::make('background')->label('Antecedentes'),
-                    Textarea::make('physical_exam')->label('Examen Fisico'),
-                    Textarea::make('observations')->label('Observaciónes'),
-                    Textarea::make('laboratory')->label('Laboratorio/Imagen'),
-                    Textarea::make('diagnosis')->label('Diagnóstico'),
-                    Textarea::make('medicine')->label('Medicamentos suministrados'),
+                    Textarea::make('reason')->label('Motivo')->rows(4),
+                    Textarea::make('background')->label('Antecedentes')->rows(4),
+                    Textarea::make('physical_exam')->label('Examen Fisico')->rows(4),
+                    Textarea::make('observations')->label('Observaciónes')->rows(4),
+                    Textarea::make('laboratory')->label('Laboratorio/Imagen')->rows(4),
+                    Textarea::make('diagnosis')->label('Diagnóstico')->rows(4),
+                    Textarea::make('medicine')->label('Medicamentos suministrados')->rows(4),
                 ])->columns(2),
                 Section::make()
                 ->schema([
-                    Textarea::make('details')->label('Detalles de emergencia'),
+                    Textarea::make('details')->label('Detalles de emergencia')->rows(4),
                     Select::make('status')
+                    ->default('Atendiendo')
                     ->options([
                         'Atendiendo' => 'Atendiendo',
                         'Atendida' => 'Atendida',
@@ -106,6 +108,11 @@ class EmergenciesResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\CreateAction::make()
+                ->mutateFormDataUsing(function (array $data): array {
+                    $data['user_id'] = auth()->id();
+                    return $data;
+                }),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

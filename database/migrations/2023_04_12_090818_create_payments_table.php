@@ -21,7 +21,7 @@ class CreatePaymentsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('identification')->nullable();
             $table->string('name')->nullable();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->unsignedBigInteger('insurance_id')->nullable();
             $table->string('coverage')->nullable();
             $table->float('cost')->nullable();

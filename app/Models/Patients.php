@@ -14,12 +14,12 @@ class Patients extends Model
     ];
 
     protected $fillable = [
-        'user_id', 'sexo', 'institution', 'name', 'identification', 'age','phone','range','address','blood','military_family','history'
+        'user_id', 'sexo', 'institution_id', 'name', 'identification', 'age','phone','range','address','blood','military_family','history'
     ];
 
-    public function medicalconsultations()
+    public function consultations()
     {
-    	return $this->belongsTo('App\Models\MedicalConsultations', 'patient_id');
+    	return $this->hasMany('App\Models\Consultations', 'patient_id');
     }
 
     public function licences()

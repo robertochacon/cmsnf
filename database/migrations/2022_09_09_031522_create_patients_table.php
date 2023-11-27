@@ -18,7 +18,7 @@ class CreatePatientsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('sexo')->nullable();
-            $table->string('institution')->nullable();
+            $table->unsignedBigInteger('institution_id')->nullable();
             $table->string('name')->nullable();
             $table->string('identification')->unique();
             $table->string('range')->nullable();

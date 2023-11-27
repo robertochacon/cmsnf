@@ -32,4 +32,10 @@ class PaymentsOverview extends BaseWidget
                 ->chart([1,1]),
         ];
     }
+
+    public static function canView(): bool
+    {
+        return auth()->user()->isAdmin();
+    }
+
 }

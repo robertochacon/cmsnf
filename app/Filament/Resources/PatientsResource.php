@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PatientsResource\Pages;
 use App\Filament\Resources\PatientsResource\RelationManagers;
+use App\Filament\Resources\PatientsResource\RelationManagers\ConsultationsRelationManager;
 use App\Models\Institutions;
 use App\Models\Patients;
 use Filament\Forms\Components\Repeater;
@@ -39,7 +40,7 @@ class PatientsResource extends Resource
                         ->schema([
                             Section::make()
                             ->schema([
-                                Select::make('institution')
+                                Select::make('institution_id')->label('Institucion')
                                 ->options(Institutions::all()->pluck('name', 'id'))
                                 ->searchable(),
                                 TextInput::make('range'),
@@ -129,7 +130,7 @@ class PatientsResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ConsultationsRelationManager::class
         ];
     }
 

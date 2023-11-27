@@ -23,7 +23,7 @@ class CreateLicensesTable extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('days')->nullable();
-            $table->string('diagnostic')->unique();
+            $table->longText('diagnostic')->unique();
             $table->date('date_start')->unique();
             $table->date('date_end')->unique();
             $table->enum('status',['Recibida','Aprobada','Rechazada'])->default('Recibida');
