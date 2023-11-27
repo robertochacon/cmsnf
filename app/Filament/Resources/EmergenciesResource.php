@@ -24,7 +24,9 @@ class EmergenciesResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-plus';
 
-    protected static ?string $navigationGroup = 'Emergencies';
+    protected static ?string $navigationGroup = 'Emergencias';
+
+    protected static ?string $navigationLabel = 'Emergencias';
 
     public static function form(Form $form): Form
     {

@@ -22,7 +22,9 @@ class PaymentsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
-    protected static ?string $navigationGroup = 'Payments';
+    protected static ?string $navigationGroup = 'Pagos';
+
+    protected static ?string $navigationLabel = 'Pagos';
 
     public static function form(Form $form): Form
     {

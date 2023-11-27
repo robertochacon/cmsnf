@@ -20,7 +20,9 @@ class InsurancesResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
-    protected static ?string $navigationGroup = 'Maintenance';
+    protected static ?string $navigationGroup = 'Matenimiento';
+
+    protected static ?string $navigationLabel = 'Seguros';
 
     public static function form(Form $form): Form
     {
@@ -78,6 +80,11 @@ class InsurancesResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->isSuper() || auth()->user()->isAdmin();
     }
 
 }

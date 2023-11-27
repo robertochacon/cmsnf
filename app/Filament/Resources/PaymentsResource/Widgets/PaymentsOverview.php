@@ -35,7 +35,7 @@ class PaymentsOverview extends BaseWidget
 
     public static function canView(): bool
     {
-        return auth()->user()->isAdmin();
+        return auth()->user()->isSuper() || auth()->user()->isAdmin();
     }
 
 }

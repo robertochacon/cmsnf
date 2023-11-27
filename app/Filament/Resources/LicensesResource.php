@@ -24,7 +24,9 @@ class LicensesResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
-    protected static ?string $navigationGroup = 'Licenses';
+    protected static ?string $navigationGroup = 'Licencias médicas';
+
+    protected static ?string $navigationLabel = 'Licencias médicas';
 
     public static function form(Form $form): Form
     {

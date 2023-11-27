@@ -21,7 +21,11 @@ class ProfessionsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
-    protected static ?string $navigationGroup = 'Maintenance';
+    protected static ?string $navigationGroup = 'Matenimiento';
+
+    protected static ?string $title = 'Profesiónes';
+
+    protected static ?string $navigationLabel = 'Profesiónes';
 
     public static function form(Form $form): Form
     {
@@ -75,6 +79,11 @@ class ProfessionsResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->isSuper() || auth()->user()->isAdmin();
     }
 
 }

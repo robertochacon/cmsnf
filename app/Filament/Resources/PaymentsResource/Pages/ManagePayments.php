@@ -10,6 +10,8 @@ class ManagePayments extends ManageRecords
 {
     protected static string $resource = PaymentsResource::class;
 
+    protected static ?string $title = 'Pagos';
+
     protected function getHeaderActions(): array
     {
         return [

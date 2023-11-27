@@ -13,6 +13,8 @@ class ListEmergencies extends ListRecords
 {
     protected static string $resource = EmergenciesResource::class;
 
+    protected static ?string $title = 'Emergencias';
+
     protected function getHeaderActions(): array
     {
         return [

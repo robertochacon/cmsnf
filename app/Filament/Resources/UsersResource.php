@@ -27,7 +27,9 @@ class UsersResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-users';
 
-    protected static ?string $navigationGroup = 'Users';
+    protected static ?string $navigationGroup = 'Usuarios';
+
+    protected static ?string $navigationLabel = 'Usuarios';
 
     protected static bool $isScopedToTenant = false;
 
@@ -138,6 +140,11 @@ class UsersResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->isSuper() || auth()->user()->isAdmin();
     }
 
 }

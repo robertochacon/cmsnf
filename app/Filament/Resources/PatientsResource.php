@@ -28,7 +28,9 @@ class PatientsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    protected static ?string $navigationGroup = 'Patients';
+    protected static ?string $navigationGroup = 'Pacientes';
+
+    protected static ?string $navigationLabel = 'Pacientes';
 
     public static function form(Form $form): Form
     {

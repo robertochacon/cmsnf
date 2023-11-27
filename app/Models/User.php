@@ -51,7 +51,15 @@ class User extends Authenticatable implements FilamentUser
         return true;
     }
 
+    public function isSuper(): bool {
+        return $this->type === 'super' ?? false;
+    }
+
     public function isAdmin(): bool {
-        return $this->type === 'super';
+        return $this->type === 'admin' ?? false;
+    }
+
+    public function isDoctor(): bool {
+        return $this->type === 'doctor' ?? false;
     }
 }

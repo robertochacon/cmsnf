@@ -10,6 +10,8 @@ class ManageProfessions extends ManageRecords
 {
     protected static string $resource = ProfessionsResource::class;
 
+    protected static ?string $title = 'Profesiónes';
+
     protected function getHeaderActions(): array
     {
         return [

@@ -13,6 +13,8 @@ class ListLicenses extends ListRecords
 {
     protected static string $resource = LicensesResource::class;
 
+    protected static ?string $title = 'Licencias médicas';
+
     protected function getHeaderActions(): array
     {
         return [

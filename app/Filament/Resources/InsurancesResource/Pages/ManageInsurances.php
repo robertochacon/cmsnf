@@ -10,6 +10,8 @@ class ManageInsurances extends ManageRecords
 {
     protected static string $resource = InsurancesResource::class;
 
+    protected static ?string $title = 'Seguros';
+
     protected function getHeaderActions(): array
     {
         return [

@@ -20,7 +20,9 @@ class InstitutionsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
-    protected static ?string $navigationGroup = 'Maintenance';
+    protected static ?string $navigationGroup = 'Matenimiento';
+
+    protected static ?string $navigationLabel = 'Instituciónes';
 
     public static function form(Form $form): Form
     {
@@ -76,6 +78,11 @@ class InstitutionsResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->isSuper() || auth()->user()->isAdmin();
     }
 
 }

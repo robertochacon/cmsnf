@@ -10,6 +10,8 @@ class ManageSpecialties extends ManageRecords
 {
     protected static string $resource = SpecialtiesResource::class;
 
+    protected static ?string $title = 'Especialidades medicinal';
+
     protected function getHeaderActions(): array
     {
         return [

@@ -10,6 +10,8 @@ class ManageInstitutions extends ManageRecords
 {
     protected static string $resource = InstitutionsResource::class;
 
+    protected static ?string $title = 'Instituciónes';
+
     protected function getHeaderActions(): array
     {
         return [

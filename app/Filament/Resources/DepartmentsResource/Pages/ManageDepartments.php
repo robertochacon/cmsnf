@@ -10,6 +10,8 @@ class ManageDepartments extends ManageRecords
 {
     protected static string $resource = DepartmentsResource::class;
 
+    protected static ?string $title = 'Departamentos';
+
     protected function getHeaderActions(): array
     {
         return [
