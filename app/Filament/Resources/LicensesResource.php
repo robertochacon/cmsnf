@@ -108,11 +108,6 @@ class LicensesResource extends Resource
                 ->icon('heroicon-o-arrow-down-on-square-stack')
                 ->url(fn(Licenses $record) => route('licenses.pdf.download', $record))
                 ->openUrlInNewTab(),
-                Tables\Actions\CreateAction::make()
-                ->mutateFormDataUsing(function (array $data): array {
-                    $data['user_id'] = auth()->id();
-                    return $data;
-                }),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

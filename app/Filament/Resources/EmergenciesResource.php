@@ -108,11 +108,6 @@ class EmergenciesResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\CreateAction::make()
-                ->mutateFormDataUsing(function (array $data): array {
-                    $data['user_id'] = auth()->id();
-                    return $data;
-                }),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

@@ -71,14 +71,13 @@ class ConsultationsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
-            ])
-            ->actions([
                 Tables\Actions\CreateAction::make()
                 ->mutateFormDataUsing(function (array $data): array {
                     $data['user_id'] = auth()->id();
                     return $data;
                 }),
+            ])
+            ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
