@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PatientsResource\RelationManagers;
 
+use App\Models\Prescriptions;
 use Filament\Forms;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Form;
@@ -45,6 +46,10 @@ class PrescriptionsRelationManager extends RelationManager
                 }),
             ])
             ->actions([
+                Tables\Actions\Action::make('Download')
+                ->icon('heroicon-o-arrow-down-on-square-stack')
+                ->url(fn(Prescriptions $record) => route('prescription.pdf.download', $record))
+                ->openUrlInNewTab(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

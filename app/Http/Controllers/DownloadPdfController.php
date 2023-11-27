@@ -15,7 +15,28 @@ use LaravelDaily\Invoices\Classes\Buyer;
 
 class DownloadPdfController extends Controller
 {
-    public function download(int $order)
+    public function license(int $order)
+    {
+        $customer = new Buyer([
+            'name'          => 'John Doe',
+            'custom_fields' => [
+                'email' => 'test@example.com',
+            ],
+        ]);
+
+        $item = InvoiceItem::make('Service 1')->pricePerUnit(2);
+
+        $invoice = Invoice::make()
+            ->buyer($customer)
+            ->discountByPercent(10)
+            ->taxRate(15)
+            ->shipping(1.99)
+            ->addItem($item);
+
+        return $invoice->stream();
+    }
+
+    public function prescription(int $order)
     {
         $customer = new Buyer([
             'name'          => 'John Doe',

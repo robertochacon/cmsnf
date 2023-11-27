@@ -22,4 +22,5 @@ Route::get('/login', function () {
     return redirect('/admin/login');
 })->name('login');
 
-Route::get('/{record}/pdf', [DownloadPdfController::class, 'download'])->name('licenses.pdf.download');
+Route::get('/{record}/license', [DownloadPdfController::class, 'license'])->name('licenses.pdf.download');
+Route::get('/{record}/prescription', [DownloadPdfController::class, 'prescription'])->name('prescription.pdf.download');
