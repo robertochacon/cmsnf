@@ -22,6 +22,11 @@ class Patients extends Model
     	return $this->hasMany('App\Models\Consultations', 'patient_id');
     }
 
+    public function prescriptions()
+    {
+    	return $this->hasMany('App\Models\Prescriptions', 'patient_id');
+    }
+
     public function licences()
     {
     	return $this->belongsTo('App\Models\Licenses', 'patient_id');

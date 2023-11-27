@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PatientsResource\Pages;
 use App\Filament\Resources\PatientsResource\RelationManagers;
 use App\Filament\Resources\PatientsResource\RelationManagers\ConsultationsRelationManager;
+use App\Filament\Resources\PatientsResource\RelationManagers\PrescriptionsRelationManager;
 use App\Models\Institutions;
 use App\Models\Patients;
 use Filament\Forms\Components\Repeater;
@@ -130,7 +131,8 @@ class PatientsResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ConsultationsRelationManager::class
+            ConsultationsRelationManager::class,
+            PrescriptionsRelationManager::class
         ];
     }
 

@@ -11,4 +11,9 @@ class Prescriptions extends Model
     protected $fillable = [
         'user_id','patient_id','description'
     ];
+
+    public function user()
+    {
+    	return $this->belongsTo('App\Models\User', 'user_id');
+    }
 }
