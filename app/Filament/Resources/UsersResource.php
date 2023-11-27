@@ -41,7 +41,7 @@ class UsersResource extends Resource
                     TextInput::make('email')->required()->email(),
                     TextInput::make('password')->required()->password()->hiddenOn('edit'),
                     TextInput::make('phone')->numeric(),
-                    Select::make('sexo')->label('Genero')
+                    Select::make('sexo')->label('Genero')->default('Masculino')
                         ->options([
                             'Masculino' => 'Masculino',
                             'Femenino' => 'Femenino',
@@ -62,7 +62,7 @@ class UsersResource extends Resource
                     Select::make('specialty')
                         ->options(Specialties::all()->pluck('name', 'id'))
                         ->searchable(),
-                    Select::make('type')
+                    Select::make('type')->default('Doctor')
                         ->options([
                             'user' => 'User',
                             'doctor' => 'Doctor',

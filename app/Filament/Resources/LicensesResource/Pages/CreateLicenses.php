@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateLicenses extends CreateRecord
 {
     protected static string $resource = LicensesResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
