@@ -3,24 +3,17 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PaymentsResource\Pages;
-use App\Filament\Resources\PaymentsResource\RelationManagers;
 use App\Models\Insurances;
 use App\Models\Payments;
-use Filament\Facades\Filament;
-use Filament\Forms;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class PaymentsResource extends Resource
@@ -40,13 +33,14 @@ class PaymentsResource extends Resource
                 TextInput::make('name')->required(),
                 RichEditor::make('description')
                     ->columnSpan('full'),
-                Select::make('insurance')
-                    ->options(Insurances::all()->pluck('name', 'coverage'))
+                Select::make('insurance_id')
+                    ->options(Insurances::all()->pluck('name','id'))
                     ->searchable(['name'])
                     ->required()
                     ->reactive()
                     ->afterStateUpdated(function ($state, callable $set){
-                        $set('coverage', $state);
+                        $coverage = Insurances::where('id', $state)->first()->coverage;
+                        $set('coverage', $coverage);
                     }),
                 TextInput::make('coverage')
                     ->prefix('$')
@@ -56,8 +50,13 @@ class PaymentsResource extends Resource
                 TextInput::make('cost')
                     ->prefix('$')
                     ->numeric()
-                    ->required(),
-                TextInput::make('total')
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $set, Get $get){
+                        $result = $state - ($state * $get('coverage') / 100);
+                        $set('total', $result);
+                    }),
+                TextInput::make('total')->label('Total a pagar')
                     ->prefix('$')
                     ->numeric()
                     ->required(),
@@ -99,7 +98,6 @@ class PaymentsResource extends Resource
                 ]),
             ]);
     }
-
 
     public static function getRelations(): array
     {

@@ -16,4 +16,11 @@ class ManagePayments extends ManageRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            PaymentsResource\Widgets\PaymentsOverview::class,
+        ];
+    }
 }
