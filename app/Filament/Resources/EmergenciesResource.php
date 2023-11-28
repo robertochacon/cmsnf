@@ -6,6 +6,7 @@ use App\Filament\Resources\EmergenciesResource\Pages;
 use App\Models\Emergencies;
 use App\Models\Patients;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -36,7 +37,7 @@ class EmergenciesResource extends Resource
             ->schema([
                 Section::make('Información del paciente')
                 ->schema([
-                    Select::make('patient_id')->label('Buscar paciente por identificacion')
+                    Select::make('patient_id')->label('Buscar paciente por identificación')
                     ->options(Patients::all()->pluck('identification', 'id'))
                     ->searchable()
                     ->reactive()
@@ -48,7 +49,7 @@ class EmergenciesResource extends Resource
                         }
                     }),
                     Hidden::make('identification'),
-                    TextInput::make('name')->readOnly(),
+                    TextInput::make('name')->readOnly()->label('Nombre del paciente'),
                 ])->columns(3),
                 Section::make('Signos Vitales')
                 ->schema([
@@ -59,18 +60,18 @@ class EmergenciesResource extends Resource
                 ])->columns(4),
                 Section::make('Información de emergencia')
                 ->schema([
-                    Textarea::make('reason')->label('Motivo')->rows(4),
-                    Textarea::make('background')->label('Antecedentes')->rows(4),
-                    Textarea::make('physical_exam')->label('Examen Fisico')->rows(4),
-                    Textarea::make('observations')->label('Observaciónes')->rows(4),
-                    Textarea::make('laboratory')->label('Laboratorio/Imagen')->rows(4),
-                    Textarea::make('diagnosis')->label('Diagnóstico')->rows(4),
-                    Textarea::make('medicine')->label('Medicamentos suministrados')->rows(4),
+                    RichEditor::make('reason')->label('Motivo'),
+                    RichEditor::make('background')->label('Antecedentes'),
+                    RichEditor::make('physical_exam')->label('Examen Fisico'),
+                    RichEditor::make('observations')->label('Observaciónes'),
+                    RichEditor::make('laboratory')->label('Laboratorio/Imagen'),
+                    RichEditor::make('diagnosis')->label('Diagnóstico'),
+                    RichEditor::make('medicine')->label('Medicamentos suministrados'),
                 ])->columns(2),
                 Section::make()
                 ->schema([
-                    Textarea::make('details')->label('Detalles de emergencia')->rows(4),
-                    Select::make('status')
+                    RichEditor::make('details')->label('Detalles de emergencia'),
+                    Select::make('status')->label('Estado')
                     ->default('Atendiendo')
                     ->options([
                         'Atendiendo' => 'Atendiendo',
@@ -83,7 +84,7 @@ class EmergenciesResource extends Resource
                 Section::make('Información de traslado')
                 ->schema([
                     TextInput::make('hospital_transfer')->label('Hospital'),
-                    Textarea::make('reason_transfer')->label('Motivo'),
+                    RichEditor::make('reason_transfer')->label('Motivo'),
                 ])->columns(2)
                 ->hidden(fn (Get $get): bool => $get('status') != 'Traslado'),
             ]);
@@ -93,27 +94,27 @@ class EmergenciesResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('identification')
+                TextColumn::make('identification')->label('Identificación')
                 ->searchable(),
-                TextColumn::make('name')
+                TextColumn::make('name')->label('Nombre de paciente')
                 ->searchable(),
-                TextColumn::make('user.name')
+                TextColumn::make('user.name')->label('Usuario')
                 ->searchable(),
-                TextColumn::make('status')
+                TextColumn::make('status')->label('Estado')
                 ->badge()
                 ->color(fn (string $state): string => match ($state) {
                     'Atendiendo' => 'info',
                     'Atendida' => 'success',
                     'Traslado' => 'warning',
                 }),
-                TextColumn::make('created_at')->since(),
+                TextColumn::make('created_at')->since()->label('Creado'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->label('Editar'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

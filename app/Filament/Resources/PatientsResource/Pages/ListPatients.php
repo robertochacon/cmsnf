@@ -18,7 +18,7 @@ class ListPatients extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            Actions\CreateAction::make()->label('Nuevo Paciente')
             ->mutateFormDataUsing(function (array $data): array {
                 $data['user_id'] = auth()->id();
                 return $data;

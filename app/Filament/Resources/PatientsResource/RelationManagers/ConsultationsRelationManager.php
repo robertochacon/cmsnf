@@ -20,6 +20,8 @@ class ConsultationsRelationManager extends RelationManager
 {
     protected static string $relationship = 'consultations';
 
+    protected static ?string $title = 'Consultas médicas';
+
     public function form(Form $form): Form
     {
         return $form

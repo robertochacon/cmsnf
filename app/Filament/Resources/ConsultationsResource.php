@@ -37,7 +37,7 @@ class ConsultationsResource extends Resource
             ->schema([
                 Section::make('Información del paciente')
                 ->schema([
-                    Select::make('patient_id')->label('Buscar paciente por identificacion')
+                    Select::make('patient_id')->label('Buscar paciente por identificación')
                     ->options(Patients::all()->pluck('identification', 'id'))
                     ->searchable()
                     ->reactive()
@@ -49,8 +49,8 @@ class ConsultationsResource extends Resource
                         }
                     }),
                     // Hidden::make('identification'),
-                    TextInput::make('name')->readOnly(),
-                    Select::make('status')
+                    TextInput::make('name')->readOnly()->label('Nombre'),
+                    Select::make('status')->label('Estado')
                     ->default('Pendiente')
                     ->options([
                         'Pendiente' => 'Pendiente',
@@ -60,15 +60,15 @@ class ConsultationsResource extends Resource
                 ])->columns(3),
                 Section::make('Signos vitales')
                 ->schema([
-                    TextInput::make('ta'),
-                    TextInput::make('fc'),
-                    TextInput::make('fr'),
+                    TextInput::make('ta')->label('TA'),
+                    TextInput::make('fc')->label('FC'),
+                    TextInput::make('fr')->label('FR'),
                 ])
                 ->columns(3),
                 Section::make()
                 ->schema([
                     TextInput::make('reason')->label('Motivo')->required(),
-                    RichEditor::make('reason_description')->label('Descripcion')
+                    RichEditor::make('reason_description')->label('Descripción')
                 ]),
                 Section::make()
                 ->schema([
@@ -88,20 +88,20 @@ class ConsultationsResource extends Resource
             ->columns([
                 TextColumn::make('reason')->default('N/A')->label('Motivo')->searchable(),
                 TextColumn::make('user.name')->default('N/A')->label('Registrado por'),
-                TextColumn::make('status')
+                TextColumn::make('status')->label('Estado')
                 ->badge()
                 ->color(fn (string $state): string => match ($state) {
                     'Pendiente' => 'info',
                     'Completada' => 'success'
                 }),
-                TextColumn::make('created_at')->since(),
+                TextColumn::make('created_at')->since()->label('Creado'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->label('Editar'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -10,6 +10,8 @@ class CreateConsultations extends CreateRecord
 {
     protected static string $resource = ConsultationsResource::class;
 
+    protected static ?string $title = 'Crear Consulta';
+
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['user_id'] = auth()->id();

@@ -45,22 +45,22 @@ class PatientsResource extends Resource
                         ->schema([
                             Section::make()
                             ->schema([
-                                Select::make('institution_id')->label('Institucion')
+                                Select::make('institution_id')->label('Institución')
                                 ->options(Institutions::all()->pluck('name', 'id'))
                                 ->searchable(),
-                                TextInput::make('range'),
-                                TextInput::make('identification')->required(),
-                                TextInput::make('name')->required(),
-                                TextInput::make('phone')->numeric(),
-                                TextInput::make('age')->numeric(),
+                                TextInput::make('range')->label('Rango'),
+                                TextInput::make('identification')->required()->label('Identificación'),
+                                TextInput::make('name')->required()->label('Nombre'),
+                                TextInput::make('phone')->numeric()->label('Teléfono'),
+                                TextInput::make('age')->numeric()->label('Edad'),
                                 Select::make('sexo')->label('Genero')
                                 ->options([
                                     'Masculino' => 'Masculino',
                                     'Femenino' => 'Femenino',
                                 ])
                                 ->searchable(),
-                                TextInput::make('blood'),
-                                Textarea::make('address'),
+                                TextInput::make('blood')->label('Sangre'),
+                                Textarea::make('address')->label('Dirección'),
                             ])
                             ->columns(3),
                     ]),
@@ -68,15 +68,16 @@ class PatientsResource extends Resource
                         ->icon('heroicon-m-clipboard-document-list')
                         ->description('Información de familiares militar del paciente')
                         ->schema([
-                            Section::make('Familiar militar')
+                            Section::make()
                             ->schema([
-                                Repeater::make('military_family')
+                                Repeater::make('military_family')->label('Familiar militar')
                                 ->schema([
                                     Select::make('institution')
                                     ->options(Institutions::all()->pluck('name', 'id'))
                                     ->searchable(),
-                                    TextInput::make('range'),
-                                    TextInput::make('name'),
+                                    TextInput::make('range')->label('Rango'),
+                                    TextInput::make('name')->label('Nombre'),
+                                    TextInput::make('parent')->label('Parentesco'),
                                 ])
                                 ->columns(3)
                             ])
@@ -88,7 +89,7 @@ class PatientsResource extends Resource
                         ->schema([
                             Section::make()
                             ->schema([
-                                Repeater::make('history')
+                                Repeater::make('history')->label('Historial')
                                 ->schema([
                                     TextInput::make('name'),
                                     Textarea::make('description'),
@@ -107,22 +108,22 @@ class PatientsResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('identification')
+                TextColumn::make('identification')->label('Identificación')
                 ->searchable(),
-                TextColumn::make('name')
+                TextColumn::make('name')->label('Nombre')
                 ->searchable(),
-                TextColumn::make('range')->default('N/A'),
-                TextColumn::make('age')->default('N/A'),
-                TextColumn::make('blood')->default('N/A'),
-                TextColumn::make('phone')->default('N/A'),
-                TextColumn::make('created_at')->since(),
+                TextColumn::make('range')->default('N/A')->label('Rango'),
+                TextColumn::make('age')->default('N/A')->label('Edad'),
+                TextColumn::make('blood')->default('N/A')->label('Sangre'),
+                TextColumn::make('phone')->default('N/A')->label('Teléfono'),
+                TextColumn::make('created_at')->since()->label('Creado'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->label('Editar'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

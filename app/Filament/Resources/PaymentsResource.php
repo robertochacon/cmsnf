@@ -33,11 +33,11 @@ class PaymentsResource extends Resource
         return $form
             ->schema([
                 //
-                TextInput::make('identification')->numeric()->required(),
-                TextInput::make('name')->required(),
-                RichEditor::make('description')
+                TextInput::make('identification')->numeric()->required()->label('Identificación'),
+                TextInput::make('name')->required()->label('Nombre'),
+                RichEditor::make('description')->label('Descripción')
                     ->columnSpan('full'),
-                Select::make('insurance_id')
+                Select::make('insurance_id')->label('Seguro')
                     ->options(Insurances::all()->pluck('name','id'))
                     ->searchable(['name'])
                     ->required()
@@ -46,12 +46,12 @@ class PaymentsResource extends Resource
                         $coverage = Insurances::where('id', $state)->first()->coverage;
                         $set('coverage', $coverage);
                     }),
-                TextInput::make('coverage')
+                TextInput::make('coverage')->label('Covertura')
                     ->prefix('$')
                     ->numeric()
                     ->required()
                     ->readOnly(),
-                TextInput::make('cost')
+                TextInput::make('cost')->label('Costo')
                     ->prefix('$')
                     ->numeric()
                     ->required()
@@ -64,7 +64,7 @@ class PaymentsResource extends Resource
                     ->prefix('$')
                     ->numeric()
                     ->required(),
-                Select::make('status')->label('Pay')
+                Select::make('status')->label('Forma de pago')
                     ->options([
                         'Efectivo' => 'Efectivo',
                         'Tarjeta' => 'Tarjeta',
@@ -78,22 +78,22 @@ class PaymentsResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('identification')
+                TextColumn::make('identification')->label('Identification')
                 ->searchable(),
-                TextColumn::make('name')
+                TextColumn::make('name')->label('Nombre')
                 ->searchable(),
-                TextColumn::make('coverage')->prefix('%'),
-                TextColumn::make('cost')->money(),
-                TextColumn::make('total')->money(),
-                TextColumn::make('created_at')->since(),
-                TextColumn::make('status')->label('Method'),
+                TextColumn::make('coverage')->prefix('%')->label('Covertura'),
+                TextColumn::make('cost')->money()->label('Costo'),
+                TextColumn::make('total')->money()->label('Total'),
+                TextColumn::make('created_at')->since()->label('Creado'),
+                TextColumn::make('status')->label('Forma de pago'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->label('Editar'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

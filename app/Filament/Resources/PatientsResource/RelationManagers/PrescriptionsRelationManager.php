@@ -17,6 +17,8 @@ class PrescriptionsRelationManager extends RelationManager
 {
     protected static string $relationship = 'prescriptions';
 
+    protected static ?string $title = 'Prescripciones';
+
     public function form(Form $form): Form
     {
         return $form

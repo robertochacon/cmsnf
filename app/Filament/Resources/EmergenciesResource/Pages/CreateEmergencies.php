@@ -10,6 +10,8 @@ class CreateEmergencies extends CreateRecord
 {
     protected static string $resource = EmergenciesResource::class;
 
+    protected static ?string $title = 'Crear Emergencia';
+
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['user_id'] = auth()->id();

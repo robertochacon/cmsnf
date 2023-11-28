@@ -37,20 +37,20 @@ class LicensesResource extends Resource
                 Section::make()
                 ->columns(3)
                 ->schema([
-                    TextInput::make('identification')->required(),
-                    TextInput::make('name')->required(),
-                    TextInput::make('phone')->numeric()->required(),
+                    TextInput::make('identification')->required()->label('Identificación'),
+                    TextInput::make('name')->required()->label('Nombre'),
+                    TextInput::make('phone')->numeric()->required()->label('Teléfono'),
                 ]),
                 Section::make()
                 ->columns(2)
                 ->schema([
-                    Textarea::make('address')->required(),
-                    Textarea::make('diagnostic')->required(),
+                    Textarea::make('address')->required()->label('Dirección'),
+                    Textarea::make('diagnostic')->required()->label('Diagnóstico'),
                 ]),
                 Section::make()
                 ->columns(3)
                 ->schema([
-                    DatePicker::make('date_start')->required()
+                    DatePicker::make('date_start')->required()->label('Fecha de inicio')
                     ->reactive()
                     ->afterStateUpdated(function ($state, callable $set, Get $get){
 
@@ -61,7 +61,7 @@ class LicensesResource extends Resource
                         }
 
                     }),
-                    DatePicker::make('date_end')->required()
+                    DatePicker::make('date_end')->required()->label('Fecha final')
                     ->reactive()
                     ->afterStateUpdated(function ($state, callable $set, Get $get){
 
@@ -71,8 +71,8 @@ class LicensesResource extends Resource
                             $set('days', $fechaExpiracion->diffInDays($fechaEmision));
                         }
                     }),
-                    TextInput::make('days')->numeric()->readOnly(),
-                    Select::make('status')
+                    TextInput::make('days')->numeric()->readOnly()->label('Días'),
+                    Select::make('status')->label('Estado')
                     ->default('Recibida')
                     ->searchable()
                     ->options([
@@ -91,22 +91,22 @@ class LicensesResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('identification')
+                TextColumn::make('identification')->label('Nombre')
                 ->searchable(),
-                TextColumn::make('name')
+                TextColumn::make('name')->label('Nombre')
                 ->searchable(),
-                TextColumn::make('phone'),
-                TextColumn::make('days'),
-                TextColumn::make('date_start'),
-                TextColumn::make('date_end'),
-                TextColumn::make('status')
+                TextColumn::make('phone')->label('Teléfono'),
+                TextColumn::make('days')->label('Días'),
+                TextColumn::make('date_start')->label('Fecha de inicio'),
+                TextColumn::make('date_end')->label('Fecha final'),
+                TextColumn::make('status')->label('Estado')
                 ->badge()
                 ->color(fn (string $state): string => match ($state) {
                     'Recibida' => 'gray',
                     'Aprobada' => 'success',
                     'Rechazada' => 'danger',
                 }),
-                TextColumn::make('created_at')->since(),
+                TextColumn::make('created_at')->since()->label('Creado'),
             ])
             ->filters([
                 //
@@ -116,8 +116,8 @@ class LicensesResource extends Resource
                 ->icon('heroicon-o-arrow-down-on-square-stack')
                 ->url(fn(Licenses $record) => route('licenses.pdf.download', $record))
                 ->openUrlInNewTab(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->label('Editar'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
