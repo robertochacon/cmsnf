@@ -29,9 +29,9 @@ class InstitutionsResource extends Resource
         return $form
             ->schema([
                 //
-                TextInput::make('name')->required(),
-                TextInput::make('phone'),
-                Toggle::make('status')
+                TextInput::make('name')->required()->label('Nombre'),
+                TextInput::make('phone')->label('Teléfono'),
+                Toggle::make('status')->label('Estado')
             ]);
     }
 
@@ -40,18 +40,18 @@ class InstitutionsResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('name')
+                TextColumn::make('name')->label('Nombre')
                 ->searchable(),
                 // TextColumn::make('phone')->default('N/A'),
                 // TextColumn::make('created_at')->since(),
-                ToggleColumn::make('status')
+                ToggleColumn::make('status')->label('Creado')
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->label('Editar'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

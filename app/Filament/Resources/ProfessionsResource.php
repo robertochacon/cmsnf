@@ -32,8 +32,8 @@ class ProfessionsResource extends Resource
         return $form
             ->schema([
                 //
-                TextInput::make('name')->required(),
-                Toggle::make('status')
+                TextInput::make('name')->required()->label('Nombre'),
+                Toggle::make('status')->label('Estado')
             ]);
     }
 
@@ -42,17 +42,17 @@ class ProfessionsResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('name')
+                TextColumn::make('name')->label('Nombre')
                 ->searchable(),
-                TextColumn::make('created_at')->since(),
-                ToggleColumn::make('status')
+                TextColumn::make('created_at')->since()->label('Creado'),
+                ToggleColumn::make('status')->label('Estado')
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->label('Editar'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

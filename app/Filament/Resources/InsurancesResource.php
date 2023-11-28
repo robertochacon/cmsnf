@@ -29,10 +29,10 @@ class InsurancesResource extends Resource
         return $form
             ->schema([
                 //
-                TextInput::make('name')->required(),
-                TextInput::make('phone'),
-                TextInput::make('coverage')->prefix('%')->numeric()->minValue(0)->maxValue(100),
-                Toggle::make('status')
+                TextInput::make('name')->required()->label('Nombre'),
+                TextInput::make('phone')->label('Teléfono'),
+                TextInput::make('coverage')->prefix('%')->numeric()->minValue(0)->maxValue(100)->label('Covertura'),
+                Toggle::make('status')->label('Estado')
             ]);
     }
 
@@ -41,19 +41,19 @@ class InsurancesResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('name')
+                TextColumn::make('name')->label('Nombre')
                 ->searchable(),
-                TextColumn::make('phone')->default('N/A'),
-                TextColumn::make('coverage')->prefix('%'),
-                TextColumn::make('created_at')->since(),
-                ToggleColumn::make('status')
+                TextColumn::make('phone')->default('N/A')->label('Teléfono'),
+                TextColumn::make('coverage')->prefix('%')->label('Covertura'),
+                TextColumn::make('created_at')->since()->label('creado'),
+                ToggleColumn::make('status')->label('Estado')
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->label('Editar'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
