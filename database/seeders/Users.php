@@ -18,7 +18,7 @@ class Users extends Seeder
         User::create([
             'name' => 'Administrador',
             'email' => 'admin@admin.com',
-            'password' => bcrypt('admin'), // JGAyV3x2
+            'password' => bcrypt('admin'),
             'remember_token' => null,
             'approved' => 1,
             'type' => 'super',
@@ -29,10 +29,10 @@ class Users extends Seeder
         User::create([
             'name' => 'Doctor admin',
             'email' => 'doctor@admin.com',
-            'password' => bcrypt('admin'), // JGAyV3x2
+            'password' => bcrypt('admin'),
             'remember_token' => null,
             'approved' => 1,
-            'type' => 'doctor',
+            'type' => 'admin',
             'verified' => 1,
             'created_at' => date("Y-m-d H:i:s")
         ]);
@@ -40,7 +40,7 @@ class Users extends Seeder
         User::create([
             'name' => 'Doctor',
             'email' => 'doctor@doctor.com',
-            'password' => bcrypt('doctor'), // JGAyV3x2
+            'password' => bcrypt('doctor'),
             'remember_token' => null,
             'approved' => 1,
             'type' => 'doctor',

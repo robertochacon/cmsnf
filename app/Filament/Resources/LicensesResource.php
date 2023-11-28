@@ -28,6 +28,8 @@ class LicensesResource extends Resource
 
     protected static ?string $navigationLabel = 'Licencias médicas';
 
+    protected static ?int $navigationSort = 5;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -71,11 +73,15 @@ class LicensesResource extends Resource
                     }),
                     TextInput::make('days')->numeric()->readOnly(),
                     Select::make('status')
+                    ->default('Recibida')
+                    ->searchable()
                     ->options([
                         'Recibida' => 'Recibida',
                         'Aprobada' => 'Aprobada',
                         'Rechazada' => 'Rechazada',
-                    ])->visibleOn('edit')
+                    ])
+                    ->visibleOn('edit')
+                    ->visible(auth()->user()->isSuper() || auth()->user()->isAdmin())
                 ])
             ]);
     }

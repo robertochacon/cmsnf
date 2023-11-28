@@ -26,6 +26,8 @@ class PaymentsResource extends Resource
 
     protected static ?string $navigationLabel = 'Pagos';
 
+    protected static ?int $navigationSort = 4;
+
     public static function form(Form $form): Form
     {
         return $form

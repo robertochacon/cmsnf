@@ -23,13 +23,13 @@ class UsersResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?int $navigationSort = 1;
-
     protected static ?string $navigationIcon = 'heroicon-s-users';
 
     protected static ?string $navigationGroup = 'Usuarios';
 
     protected static ?string $navigationLabel = 'Usuarios';
+
+    protected static ?int $navigationSort = 6;
 
     protected static bool $isScopedToTenant = false;
 
