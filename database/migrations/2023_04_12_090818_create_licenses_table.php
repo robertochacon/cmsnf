@@ -26,6 +26,7 @@ class CreateLicensesTable extends Migration
             $table->longText('diagnostic')->unique();
             $table->date('date_start')->unique();
             $table->date('date_end')->unique();
+            $table->boolean('open')->default(false);
             $table->enum('status',['Recibida','Aprobada','Rechazada'])->default('Recibida');
             $table->timestamps();
         });

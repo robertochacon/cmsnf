@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\PatientsResource\RelationManagers;
 
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
@@ -50,6 +51,10 @@ class ConsultationsRelationManager extends RelationManager
                     'Completada' => 'Completada',
                 ])
                 ->live()
+                ->searchable(),
+                Select::make('transfer')
+                ->label('Transferir a')
+                ->options(User::where('type','doctor')->get()->pluck('name', 'id'))
                 ->searchable(),
             ]);
     }

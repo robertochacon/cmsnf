@@ -10,11 +10,13 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
@@ -81,7 +83,9 @@ class LicensesResource extends Resource
                         'Rechazada' => 'Rechazada',
                     ])
                     ->visibleOn('edit')
-                    ->visible(auth()->user()->isSuper() || auth()->user()->isAdmin())
+                    ->visible(auth()->user()->isSuper() || auth()->user()->isAdmin()),
+                    Toggle::make('open')
+                    ->label('Continua')
                 ])
             ]);
     }
@@ -91,7 +95,7 @@ class LicensesResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('identification')->label('Nombre')
+                TextColumn::make('identification')->label('Identificacion')
                 ->searchable(),
                 TextColumn::make('name')->label('Nombre')
                 ->searchable(),
@@ -99,6 +103,8 @@ class LicensesResource extends Resource
                 TextColumn::make('days')->label('Días'),
                 TextColumn::make('date_start')->label('Fecha de inicio'),
                 TextColumn::make('date_end')->label('Fecha final'),
+                ToggleColumn::make('open')
+                ->label('Continua'),
                 TextColumn::make('status')->label('Estado')
                 ->badge()
                 ->color(fn (string $state): string => match ($state) {

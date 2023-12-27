@@ -6,6 +6,7 @@ use App\Filament\Resources\ConsultationsResource\Pages;
 use App\Filament\Resources\ConsultationsResource\RelationManagers;
 use App\Models\Consultations;
 use App\Models\Patients;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
@@ -77,6 +78,10 @@ class ConsultationsResource extends Resource
                     RichEditor::make('complementary_studies')->label('Estudios complentarios'),
                     RichEditor::make('diagnosis')->label('Diagnóstico'),
                     RichEditor::make('treatment')->label('Tratamiento'),
+                    Select::make('transfer')
+                    ->label('Transferir a')
+                    ->options(User::where('type','doctor')->get()->pluck('name', 'id'))
+                    ->searchable(),
                 ])
                 ->columns(2),
             ]);
