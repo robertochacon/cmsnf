@@ -34,6 +34,9 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
+            // ->brandLogo(asset('images/logo.png'))
+            ->brandLogo(fn () => view('filament.components.logo'))
+            ->brandLogoHeight('11rem')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
