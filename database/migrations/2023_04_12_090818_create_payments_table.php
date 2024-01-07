@@ -23,6 +23,7 @@ class CreatePaymentsTable extends Migration
             $table->string('name')->nullable();
             $table->longText('description')->nullable();
             $table->unsignedBigInteger('insurance_id')->nullable();
+            $table->string('nss')->nullable();
             $table->string('coverage')->nullable();
             $table->float('cost')->nullable();
             $table->float('total')->nullable();

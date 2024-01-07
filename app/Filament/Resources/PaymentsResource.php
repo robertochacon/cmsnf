@@ -46,6 +46,8 @@ class PaymentsResource extends Resource
                         $coverage = Insurances::where('id', $state)->first()->coverage;
                         $set('coverage', $coverage);
                     }),
+                TextInput::make('nss')->label('NSS')
+                    ->numeric(),
                 TextInput::make('coverage')->label('Covertura')
                     ->prefix('$')
                     ->numeric()
