@@ -55,8 +55,28 @@ class UsersResource extends Resource
                         ->options(Institutions::all()->pluck('name', 'id'))
                         ->label('Institución')
                         ->searchable(),
-                    TextInput::make('range')
-                    ->label('Rango'),
+                        Select::make('range')
+                        ->options([
+                            'Teniente General o Almirante' => 'Teniente General o Almirante',
+                            'Mayor General o Vicealmirante' => 'Mayor General o Vicealmirante',
+                            'General de Brigada o Contralmirante' => 'General de Brigada o Contralmirante',
+                            'Coronel o Capitán de Navío' => 'Coronel o Capitán de Navío',
+                            'Teniente Coronel o Capitán de Fragata' => 'Teniente Coronel o Capitán de Fragata',
+                            'Mayor o Capitán de Corbeta' => 'Mayor o Capitán de Corbeta',
+                            'Capitán o Teniente de Navío' => 'Capitán o Teniente de Navío',
+                            'Primer Teniente o Teniente de Fragata' => 'Primer Teniente o Teniente de Fragata',
+                            'Segundo Teniente o Teniente de Corbeta' => 'Segundo Teniente o Teniente de Corbeta',
+                            'Sub Oficial' => 'Sub Oficial',
+                            'Cadete o Guardiamarina' => 'Cadete o Guardiamarina',
+                            'Sargento Mayor' => 'Sargento Mayor',
+                            'Sargento Primero' => 'Sargento Primero',
+                            'Sargento de Administración y Contabilidad' => 'Sargento de Administración y Contabilidad',
+                            'Sargento' => 'Sargento',
+                            'Cabo' => 'Cabo',
+                            'Raso Primera Clase/Marinero' => 'Raso Primera Clase/Marinero',
+                        ])
+                        ->label('Rango')
+                        ->searchable(),
                     Select::make('department')
                         ->options(Departments::all()->pluck('name', 'id'))
                         ->label('Departamento')

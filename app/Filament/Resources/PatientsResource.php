@@ -48,7 +48,28 @@ class PatientsResource extends Resource
                                 Select::make('institution_id')->label('Institución')
                                 ->options(Institutions::all()->pluck('name', 'id'))
                                 ->searchable(),
-                                TextInput::make('range')->label('Rango'),
+                                Select::make('range')
+                                ->options([
+                                    'Teniente General o Almirante' => 'Teniente General o Almirante',
+                                    'Mayor General o Vicealmirante' => 'Mayor General o Vicealmirante',
+                                    'General de Brigada o Contralmirante' => 'General de Brigada o Contralmirante',
+                                    'Coronel o Capitán de Navío' => 'Coronel o Capitán de Navío',
+                                    'Teniente Coronel o Capitán de Fragata' => 'Teniente Coronel o Capitán de Fragata',
+                                    'Mayor o Capitán de Corbeta' => 'Mayor o Capitán de Corbeta',
+                                    'Capitán o Teniente de Navío' => 'Capitán o Teniente de Navío',
+                                    'Primer Teniente o Teniente de Fragata' => 'Primer Teniente o Teniente de Fragata',
+                                    'Segundo Teniente o Teniente de Corbeta' => 'Segundo Teniente o Teniente de Corbeta',
+                                    'Sub Oficial' => 'Sub Oficial',
+                                    'Cadete o Guardiamarina' => 'Cadete o Guardiamarina',
+                                    'Sargento Mayor' => 'Sargento Mayor',
+                                    'Sargento Primero' => 'Sargento Primero',
+                                    'Sargento de Administración y Contabilidad' => 'Sargento de Administración y Contabilidad',
+                                    'Sargento' => 'Sargento',
+                                    'Cabo' => 'Cabo',
+                                    'Raso Primera Clase/Marinero' => 'Raso Primera Clase/Marinero',
+                                ])
+                                ->label('Rango')
+                                ->searchable(),
                                 TextInput::make('identification')->required()->label('Identificación'),
                                 TextInput::make('name')->required()->label('Nombre'),
                                 TextInput::make('phone')->numeric()->label('Teléfono'),
@@ -59,7 +80,19 @@ class PatientsResource extends Resource
                                     'Femenino' => 'Femenino',
                                 ])
                                 ->searchable(),
-                                TextInput::make('blood')->label('Sangre'),
+                                Select::make('blood')->default('A+')
+                                ->options([
+                                    'A+' => 'A+',
+                                    'A-' => 'A-',
+                                    'B+' => 'B+',
+                                    'B-' => 'B-',
+                                    'AB+' => 'AB+',
+                                    'AB-' => 'AB-',
+                                    'O+' => 'O+',
+                                    'O-' => 'O-',
+                                ])
+                                ->label('Sangre')
+                                ->searchable(),
                                 Textarea::make('address')->label('Dirección'),
                             ])
                             ->columns(3),
@@ -75,7 +108,29 @@ class PatientsResource extends Resource
                                     Select::make('institution')
                                     ->options(Institutions::all()->pluck('name', 'id'))
                                     ->searchable(),
-                                    TextInput::make('range')->label('Rango'),
+                                    Select::make('range')
+                                    ->options([
+                                        'Teniente General o Almirante' => 'Teniente General o Almirante',
+                                        'Mayor General o Vicealmirante' => 'Mayor General o Vicealmirante',
+                                        'General de Brigada o Contralmirante' => 'General de Brigada o Contralmirante',
+                                        'Coronel o Capitán de Navío' => 'Coronel o Capitán de Navío',
+                                        'Teniente Coronel o Capitán de Fragata' => 'Teniente Coronel o Capitán de Fragata',
+                                        'Mayor o Capitán de Corbeta' => 'Mayor o Capitán de Corbeta',
+                                        'Capitán o Teniente de Navío' => 'Capitán o Teniente de Navío',
+                                        'Primer Teniente o Teniente de Fragata' => 'Primer Teniente o Teniente de Fragata',
+                                        'Segundo Teniente o Teniente de Corbeta' => 'Segundo Teniente o Teniente de Corbeta',
+                                        'Sub Oficial' => 'Sub Oficial',
+                                        'Cadete o Guardiamarina' => 'Cadete o Guardiamarina',
+                                        'Sargento Mayor' => 'Sargento Mayor',
+                                        'Sargento Primero' => 'Sargento Primero',
+                                        'Sargento de Administración y Contabilidad' => 'Sargento de Administración y Contabilidad',
+                                        'Sargento' => 'Sargento',
+                                        'Cabo' => 'Cabo',
+                                        'Raso Primera Clase/Marinero' => 'Raso Primera Clase/Marinero',
+                                    ])
+                                    ->label('Rango')
+                                    ->searchable(),
+                                    // TextInput::make('range')->label('Rango'),
                                     TextInput::make('name')->label('Nombre'),
                                     TextInput::make('parent')->label('Parentesco'),
                                 ])
