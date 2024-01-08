@@ -15,6 +15,8 @@ class EditPatients extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            Actions\Action::make('Crear Emergencia')
+            ->url(fn (): string => url('admin/emergencies/create')),
             Actions\DeleteAction::make()->label('Eliminar'),
         ];
     }
