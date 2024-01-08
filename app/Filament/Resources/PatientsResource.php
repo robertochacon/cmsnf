@@ -50,6 +50,7 @@ class PatientsResource extends Resource
                                 ->searchable(),
                                 Select::make('range')
                                 ->options([
+                                    'No aplica' => 'No aplica',
                                     'Teniente General o Almirante' => 'Teniente General o Almirante',
                                     'Mayor General o Vicealmirante' => 'Mayor General o Vicealmirante',
                                     'General de Brigada o Contralmirante' => 'General de Brigada o Contralmirante',
@@ -110,6 +111,7 @@ class PatientsResource extends Resource
                                     ->searchable(),
                                     Select::make('range')
                                     ->options([
+                                        'No aplica' => 'No aplica',
                                         'Teniente General o Almirante' => 'Teniente General o Almirante',
                                         'Mayor General o Vicealmirante' => 'Mayor General o Vicealmirante',
                                         'General de Brigada o Contralmirante' => 'General de Brigada o Contralmirante',
@@ -130,7 +132,6 @@ class PatientsResource extends Resource
                                     ])
                                     ->label('Rango')
                                     ->searchable(),
-                                    // TextInput::make('range')->label('Rango'),
                                     TextInput::make('name')->label('Nombre'),
                                     TextInput::make('parent')->label('Parentesco'),
                                 ])

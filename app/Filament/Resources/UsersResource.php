@@ -57,6 +57,7 @@ class UsersResource extends Resource
                         ->searchable(),
                         Select::make('range')
                         ->options([
+                            'No aplica' => 'No aplica',
                             'Teniente General o Almirante' => 'Teniente General o Almirante',
                             'Mayor General o Vicealmirante' => 'Mayor General o Vicealmirante',
                             'General de Brigada o Contralmirante' => 'General de Brigada o Contralmirante',
