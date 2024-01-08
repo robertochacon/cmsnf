@@ -10,6 +10,8 @@ class EditLicenses extends EditRecord
 {
     protected static string $resource = LicensesResource::class;
 
+    protected static ?string $title = 'Editar Licencia Médica';
+
     protected function getHeaderActions(): array
     {
         return [

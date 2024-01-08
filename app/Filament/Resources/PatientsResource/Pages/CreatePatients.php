@@ -11,4 +11,6 @@ class CreatePatients extends CreateRecord
     protected static string $resource = PatientsResource::class;
 
     protected static ?string $title = 'Crear Paciente';
+
+    protected static bool $canCreateAnother = false;
 }

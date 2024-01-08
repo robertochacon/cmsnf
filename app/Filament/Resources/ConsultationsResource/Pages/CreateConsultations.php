@@ -12,6 +12,8 @@ class CreateConsultations extends CreateRecord
 
     protected static ?string $title = 'Crear Consulta';
 
+    protected static bool $canCreateAnother = false;
+
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['user_id'] = auth()->id();

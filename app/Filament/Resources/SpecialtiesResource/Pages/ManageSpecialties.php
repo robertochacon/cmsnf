@@ -15,7 +15,7 @@ class ManageSpecialties extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Nueva Especialidad'),
+            Actions\CreateAction::make()->createAnother(false)->label('Nueva Especialidad'),
         ];
     }
 }

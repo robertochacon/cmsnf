@@ -15,7 +15,7 @@ class ManageProfessions extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Nueva Profesión'),
+            Actions\CreateAction::make()->createAnother(false)->label('Nueva Profesión'),
         ];
     }
 }

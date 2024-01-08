@@ -15,7 +15,7 @@ class ManageDepartments extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Nuevo Departamento'),
+            Actions\CreateAction::make()->createAnother(false)->label('Nuevo Departamento'),
         ];
     }
 }

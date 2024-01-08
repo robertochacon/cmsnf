@@ -15,7 +15,7 @@ class ManagePayments extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Nuevo Pago')
+            Actions\CreateAction::make()->createAnother(false)->label('Nuevo Pago')
             ->mutateFormDataUsing(function (array $data): array {
                 $data['user_id'] = auth()->id();
                 return $data;

@@ -15,7 +15,7 @@ class ManageInsurances extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Nuevo Seguro'),
+            Actions\CreateAction::make()->createAnother(false)->label('Nuevo Seguro'),
         ];
     }
 }

@@ -10,6 +10,10 @@ class CreateLicenses extends CreateRecord
 {
     protected static string $resource = LicensesResource::class;
 
+    protected static ?string $title = 'Crear Licencia Médica';
+
+    protected static bool $canCreateAnother = false;
+
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
