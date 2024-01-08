@@ -53,16 +53,21 @@ class UsersResource extends Resource
                 ->schema([
                     Select::make('institution')
                         ->options(Institutions::all()->pluck('name', 'id'))
+                        ->label('Institución')
                         ->searchable(),
-                    TextInput::make('range'),
+                    TextInput::make('range')
+                    ->label('Rango'),
                     Select::make('department')
                         ->options(Departments::all()->pluck('name', 'id'))
+                        ->label('Departamento')
                         ->searchable(),
                     Select::make('profession')
                         ->options(Professions::all()->pluck('name', 'id'))
+                        ->label('Profesión')
                         ->searchable(),
                     Select::make('specialty')
                         ->options(Specialties::all()->pluck('name', 'id'))
+                        ->label('Especialidad')
                         ->searchable(),
                     Select::make('type')->default('Doctor')
                         ->options([
@@ -71,6 +76,7 @@ class UsersResource extends Resource
                             'admin' => 'Admin',
                             'super' => 'Super admin',
                         ])
+                        ->label('Tipo')
                         ->searchable(),
                 ])->columns(3)
             ]);
@@ -82,14 +88,18 @@ class UsersResource extends Resource
             ->columns([
                 //
                 TextColumn::make('name')
+                ->label('Nombre')
                 ->searchable(),
                 TextColumn::make('email')
+                ->label('Correo')
                 ->searchable(),
                 // TextColumn::make('email_verified_at'),
-                CheckboxColumn::make('approved'),
-                CheckboxColumn::make('verified'),
-                TextColumn::make('type'),
-
+                CheckboxColumn::make('approved')
+                ->label('Aprobado'),
+                CheckboxColumn::make('verified')
+                ->label('Verificado'),
+                TextColumn::make('type')
+                ->label('Tipo'),
             ])
             ->filters([
                 //
