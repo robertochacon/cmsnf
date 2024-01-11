@@ -47,10 +47,8 @@ class DownloadPdfController extends Controller
 
         $invoice = Invoice::make()
             ->buyer($customer)
-            ->discountByPercent(10)
-            ->taxRate(15)
-            ->shipping(1.99)
-            ->addItem($item);
+            ->addItem($item)
+            ->template('prescription');
 
         return $invoice->stream();
     }
