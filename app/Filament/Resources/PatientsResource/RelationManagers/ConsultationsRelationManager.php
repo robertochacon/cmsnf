@@ -43,6 +43,7 @@ class ConsultationsRelationManager extends RelationManager
                     RichEditor::make('complementary_studies')->label('Estudios complentarios'),
                     RichEditor::make('diagnosis')->label('Diagnóstico'),
                     RichEditor::make('treatment')->label('Tratamiento'),
+                    RichEditor::make('note')->label('Nota'),
                 ]),
                 Select::make('status')
                 ->default('Pendiente')

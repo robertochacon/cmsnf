@@ -27,6 +27,7 @@ return new class extends Migration
             $table->longText('diagnosis')->nullable();
             $table->longText('treatment')->nullable();
             $table->longText('complementary_studies')->nullable();
+            $table->longText('note')->nullable();
             $table->enum('status',['Pendiente','Completada'])->default('Pendiente');
             $table->timestamps();
         });

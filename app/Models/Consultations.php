@@ -12,7 +12,7 @@ class Consultations extends Model
     protected $table = 'consultations';
 
     protected $fillable = [
-        'id','user_id','patient_id','ta','fc','fr','reason','reason_description','hea','physical_exam','complementary_studies','diagnosis','treatment','status'
+        'id','user_id','patient_id','ta','fc','fr','reason','reason_description','hea','physical_exam','complementary_studies','diagnosis','treatment','status','note'
     ];
 
     public function user()
