@@ -83,4 +83,14 @@ class ServicesResource extends Resource
             'index' => Pages\ManageServices::route('/'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->isSuper() || auth()->user()->isAdmin();
+    }
 }
