@@ -13,6 +13,7 @@ use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
@@ -37,6 +38,12 @@ class PaymentsResource extends Resource
                 TextInput::make('name')->required()->label('Nombre'),
                 RichEditor::make('description')->label('Descripción')
                     ->columnSpan('full'),
+                    Select::make('to')->label('Pago de consulta/emergencia')
+                    ->options([
+                        'Consulta' => 'Consulta',
+                        'Emergencia' => 'Emergencia',
+                    ])
+                    ->searchable(),
                 Select::make('insurance_id')->label('Seguro')
                     ->options(Insurances::all()->pluck('name','id'))
                     ->searchable(['name'])
@@ -51,7 +58,6 @@ class PaymentsResource extends Resource
                 TextInput::make('coverage')->label('Covertura')
                     ->prefix('$')
                     ->numeric()
-                    ->required()
                     ->readOnly(),
                 TextInput::make('cost')->label('Costo')
                     ->prefix('$')
@@ -66,7 +72,7 @@ class PaymentsResource extends Resource
                     ->prefix('$')
                     ->numeric()
                     ->required(),
-                Select::make('status')->label('Forma de pago')
+                Select::make('type')->label('Forma de pago')
                     ->options([
                         'Efectivo' => 'Efectivo',
                         'Tarjeta' => 'Tarjeta',
@@ -84,14 +90,20 @@ class PaymentsResource extends Resource
                 ->searchable(),
                 TextColumn::make('name')->label('Nombre')
                 ->searchable(),
+                TextColumn::make('to')->label('Tipo de pago'),
                 TextColumn::make('coverage')->prefix('%')->label('Covertura'),
                 TextColumn::make('cost')->money()->label('Costo'),
                 TextColumn::make('total')->money()->label('Total'),
                 TextColumn::make('created_at')->since()->label('Creado'),
-                TextColumn::make('status')->label('Forma de pago'),
+                TextColumn::make('type')->label('Forma de pago'),
             ])
             ->filters([
-                //
+                SelectFilter::make('to')
+                ->label('Tipo de pago')
+                ->options([
+                    'Consulta' => 'Consulta',
+                    'Emergencia' => 'Emergencia',
+                ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->label('Editar'),

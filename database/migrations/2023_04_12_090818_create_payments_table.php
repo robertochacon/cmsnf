@@ -27,7 +27,8 @@ class CreatePaymentsTable extends Migration
             $table->string('coverage')->nullable();
             $table->float('cost')->nullable();
             $table->float('total')->nullable();
-            $table->enum('status',['Efectivo','Tarjeta'])->default('Efectivo');
+            $table->string('to')->nullable();
+            $table->enum('type',['Efectivo','Tarjeta'])->default('Efectivo');
             $table->timestamps();
         });
     }
