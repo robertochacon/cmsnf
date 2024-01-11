@@ -24,3 +24,4 @@ Route::get('/login', function () {
 
 Route::get('/{record}/license', [DownloadPdfController::class, 'license'])->name('licenses.pdf.download');
 Route::get('/{record}/prescription', [DownloadPdfController::class, 'prescription'])->name('prescription.pdf.download');
+Route::get('/{record}/patient', [DownloadPdfController::class, 'patient'])->name('patient.pdf.download');

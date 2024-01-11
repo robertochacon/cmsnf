@@ -52,4 +52,23 @@ class DownloadPdfController extends Controller
 
         return $invoice->stream();
     }
+
+    public function patient(int $patient)
+    {
+        $customer = new Buyer([
+            'name'          => 'John Doe',
+            'custom_fields' => [
+                'email' => 'test@example.com',
+            ],
+        ]);
+
+        $item = InvoiceItem::make('Service 1')->pricePerUnit(2);
+
+        $invoice = Invoice::make()
+            ->buyer($customer)
+            ->addItem($item)
+            ->template('patient');
+
+        return $invoice->stream();
+    }
 }

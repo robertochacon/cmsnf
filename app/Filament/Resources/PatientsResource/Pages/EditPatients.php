@@ -17,6 +17,9 @@ class EditPatients extends EditRecord
         return [
             Actions\Action::make('Crear Emergencia')
             ->url(fn (): string => url('admin/emergencies/create')),
+            Actions\Action::make('Generar reporte')
+            ->color('warning')
+            ->url(fn (): string => url($this->getRecord()->id.'/patient')),
             Actions\DeleteAction::make()->label('Eliminar'),
         ];
     }
