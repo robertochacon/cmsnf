@@ -11,11 +11,13 @@ use App\Models\User;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
@@ -48,6 +50,7 @@ class UsersResource extends Resource
                             'Masculino' => 'Masculino',
                             'Femenino' => 'Femenino',
                         ]),
+                    Toggle::make('belongs')
                 ])->columns(3),
                 Section::make('Información profesional')
                 ->schema([
@@ -114,11 +117,13 @@ class UsersResource extends Resource
                 TextColumn::make('email')
                 ->label('Correo')
                 ->searchable(),
+                ToggleColumn::make('belongs')
+                ->label('Perteneciente'),
                 // TextColumn::make('email_verified_at'),
-                CheckboxColumn::make('approved')
+                ToggleColumn::make('approved')
                 ->label('Aprobado'),
-                CheckboxColumn::make('verified')
-                ->label('Verificado'),
+                // CheckboxColumn::make('verified')
+                // ->label('Verificado'),
                 TextColumn::make('type')
                 ->label('Tipo'),
             ])
@@ -127,20 +132,20 @@ class UsersResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('Verify')
-                ->icon('heroicon-m-check-badge')
-                ->action(function(User $user){
-                    $user->email_verified_at = Date('Y-m-d H:i:s');
-                    $user->verified = true;
-                    $user->save();
-                }),
-                Tables\Actions\Action::make('Unverify')
-                ->icon('heroicon-m-x-circle')
-                ->action(function(User $user){
-                    $user->email_verified_at = null;
-                    $user->verified = false;
-                    $user->save();
-                }),
+                // Tables\Actions\Action::make('Verify')
+                // ->icon('heroicon-m-check-badge')
+                // ->action(function(User $user){
+                //     $user->email_verified_at = Date('Y-m-d H:i:s');
+                //     $user->verified = true;
+                //     $user->save();
+                // }),
+                // Tables\Actions\Action::make('Unverify')
+                // ->icon('heroicon-m-x-circle')
+                // ->action(function(User $user){
+                //     $user->email_verified_at = null;
+                //     $user->verified = false;
+                //     $user->save();
+                // }),
                 Tables\Actions\DeleteAction::make(),
 
             ])

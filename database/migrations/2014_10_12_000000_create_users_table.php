@@ -27,6 +27,7 @@ return new class extends Migration
             $table->boolean('verified')->default(0)->nullable();
             $table->datetime('verified_at')->nullable();
             $table->string('avatar_url')->nullable();
+            $table->boolean('belongs')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

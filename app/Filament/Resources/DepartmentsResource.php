@@ -23,7 +23,8 @@ class DepartmentsResource extends Resource
 
     protected static ?string $navigationGroup = 'Matenimiento';
 
-    protected static ?string $navigationLabel = 'Departamentos';
+    // protected static ?string $navigationLabel = 'Departamentos';
+    protected static ?string $navigationLabel = 'Areas';
 
     protected static bool $shouldRegisterNavigation = true;
 

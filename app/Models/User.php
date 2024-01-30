@@ -23,6 +23,7 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'avatar_url',
+        'belongs',
         'password',
     ];
 

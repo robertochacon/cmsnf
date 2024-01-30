@@ -71,6 +71,8 @@ class PatientsResource extends Resource
                                 ])
                                 ->label('Rango')
                                 ->searchable(),
+                                Toggle::make('younger')
+                                ->label('Es menor de edad?'),
                                 TextInput::make('identification')->required()->label('Identificación'),
                                 TextInput::make('name')->required()->label('Nombre'),
                                 TextInput::make('phone')->numeric()->label('Teléfono'),
