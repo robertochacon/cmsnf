@@ -8,6 +8,7 @@ use App\Filament\Resources\PatientsResource\RelationManagers\ConsultationsRelati
 use App\Filament\Resources\PatientsResource\RelationManagers\PrescriptionsRelationManager;
 use App\Models\Institutions;
 use App\Models\Patients;
+use App\Services\ARD;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -20,6 +21,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class PatientsResource extends Resource
@@ -73,7 +75,18 @@ class PatientsResource extends Resource
                                 ->searchable(),
                                 Toggle::make('younger')
                                 ->label('Es menor de edad?'),
-                                TextInput::make('identification')->required()->label('Identificación'),
+                                TextInput::make('identification')->required()->label('Identificación')                    ->required()
+                                ->reactive()
+                                ->afterStateUpdated(function ($state, callable $set){
+
+                                    $personal = (new ARD())->getPerson($state);
+                                    if (isset($personal['nombre'])) {
+                                        $set('name', $personal['nombre'].' '.$personal['apellidos']);
+                                    }else{
+                                        $set('name', '');
+                                    }
+
+                                }),
                                 TextInput::make('name')->required()->label('Nombre'),
                                 TextInput::make('phone')->numeric()->label('Teléfono'),
                                 TextInput::make('age')->numeric()->label('Edad'),

@@ -67,6 +67,24 @@ class PaymentsResource extends Resource
                     ->afterStateUpdated(function ($state, callable $set, Get $get){
                         $result = $state - ($state * $get('coverage') / 100);
                         $set('total', $result);
+
+                        //sum total
+                        $fields = $get('fields');
+
+                        var_dump($fields);
+                        exit;
+
+                        $sum = 0;
+                        foreach($fields as $field){
+                            foreach ($field as $value){
+                                if ($value == ""){
+                                    $value = 0;
+                                }
+                                $sum += $value;
+                            }
+                        }
+                        $set('total', $sum);
+
                     }),
                 TextInput::make('total')->label('Total a pagar')
                     ->prefix('$')
