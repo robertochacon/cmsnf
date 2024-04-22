@@ -14,7 +14,7 @@ class Patients extends Model
     ];
 
     protected $fillable = [
-        'user_id', 'sexo', 'institution_id', 'name', 'identification', 'age','phone','range','address','blood','military_family','history'
+        'user_id', 'sexo', 'institution_id', 'military', 'name', 'identification', 'age','phone','range','address','blood','military_family','history'
     ];
 
     public function consultations()

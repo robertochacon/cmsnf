@@ -32,11 +32,11 @@ class ListPatients extends ListRecords
             'Todos' => Tab::make()
                 ->badge(Patients::query()->count()),
             'Militares' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->whereNotNull('range'))
-                ->badge(Patients::query()->whereNotNull('range')->count()),
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('military', true))
+                ->badge(Patients::query()->where('military', true)->count()),
             'Civiles' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('range',null))
-                ->badge(Patients::query()->where('range',null)->count()),
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('military', false))
+                ->badge(Patients::query()->where('military',false)->count()),
         ];
     }
 }

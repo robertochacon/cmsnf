@@ -9,6 +9,7 @@ use App\Filament\Resources\PatientsResource\RelationManagers\PrescriptionsRelati
 use App\Models\Institutions;
 use App\Models\Patients;
 use App\Services\ARD;
+use App\Services\JCE;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -17,6 +18,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -47,47 +49,84 @@ class PatientsResource extends Resource
                         ->schema([
                             Section::make()
                             ->schema([
-                                Select::make('institution_id')->label('Institución')
-                                ->options(Institutions::all()->pluck('name', 'id'))
-                                ->searchable(),
-                                Select::make('range')
-                                ->options([
-                                    'No aplica' => 'No aplica',
-                                    'Teniente General o Almirante' => 'Teniente General o Almirante',
-                                    'Mayor General o Vicealmirante' => 'Mayor General o Vicealmirante',
-                                    'General de Brigada o Contralmirante' => 'General de Brigada o Contralmirante',
-                                    'Coronel o Capitán de Navío' => 'Coronel o Capitán de Navío',
-                                    'Teniente Coronel o Capitán de Fragata' => 'Teniente Coronel o Capitán de Fragata',
-                                    'Mayor o Capitán de Corbeta' => 'Mayor o Capitán de Corbeta',
-                                    'Capitán o Teniente de Navío' => 'Capitán o Teniente de Navío',
-                                    'Primer Teniente o Teniente de Fragata' => 'Primer Teniente o Teniente de Fragata',
-                                    'Segundo Teniente o Teniente de Corbeta' => 'Segundo Teniente o Teniente de Corbeta',
-                                    'Sub Oficial' => 'Sub Oficial',
-                                    'Cadete o Guardiamarina' => 'Cadete o Guardiamarina',
-                                    'Sargento Mayor' => 'Sargento Mayor',
-                                    'Sargento Primero' => 'Sargento Primero',
-                                    'Sargento de Administración y Contabilidad' => 'Sargento de Administración y Contabilidad',
-                                    'Sargento' => 'Sargento',
-                                    'Cabo' => 'Cabo',
-                                    'Raso Primera Clase/Marinero' => 'Raso Primera Clase/Marinero',
-                                ])
-                                ->label('Rango')
-                                ->searchable(),
+                                Toggle::make('military')
+                                ->live()
+                                ->default(true)
+                                ->label('Es militar?'),
                                 Toggle::make('younger')
                                 ->label('Es menor de edad?'),
+                            ])
+                            ->columns(2),
+                            Section::make()
+                            ->schema([
                                 TextInput::make('identification')->required()->label('Identificación')                    ->required()
                                 ->reactive()
-                                ->afterStateUpdated(function ($state, callable $set){
+                                ->afterStateUpdated(function ($state, callable $set, Get $get){
 
-                                    $personal = (new ARD())->getPerson($state);
-                                    if (isset($personal['nombre'])) {
-                                        $set('name', $personal['nombre'].' '.$personal['apellidos']);
-                                    }else{
-                                        $set('name', '');
+                                    if(strlen($state)==11){
+
+                                        $militar = (new ARD())->getPerson($state);
+                                        if (isset($militar[0]['nombre'])) {
+                                            $set('name', $militar[0]['nombre'].' '.$militar[0]['apellido']);
+                                            $set('range', $militar[0]['desc_rango']);
+                                        }else{
+                                            $set('name', '');
+                                            $set('range', '');
+                                        }
+
+                                        $persona = (new JCE())->getPerson($state);
+                                        if (isset($persona)) {
+                                            if (!isset($persona['status'])) {
+                                                if (!$get('military')) {
+                                                    $set('name', $persona['nombre'].' '.$persona['apellidos']);
+                                                }
+                                                $set('sexo', $persona['sexo']=='M'?'Masculino':'Femenino');
+                                                $set('age', $persona['edad']);
+                                                $set('address', $persona['lugarNacimiento']);
+                                            }else{
+                                                if (!$get('military')) {
+                                                    $set('name', '');
+                                                }
+                                                $set('sexo', '');
+                                                $set('age', '');
+                                                $set('address', '');
+                                            }
+                                        }
+
                                     }
 
                                 }),
                                 TextInput::make('name')->required()->label('Nombre'),
+                                Select::make('institution_id')->label('Institución')
+                                ->options(Institutions::all()->pluck('name', 'id'))
+                                ->searchable()
+                                ->visible(fn (Get $get): bool => $get('military')),
+                                TextInput::make('range')->label('Rango')
+                                ->visible(fn (Get $get): bool => $get('military')),
+                                // Select::make('range')
+                                // ->options([
+                                //     'No aplica' => 'No aplica',
+                                //     'Teniente General o Almirante' => 'Teniente General o Almirante',
+                                //     'Mayor General o Vicealmirante' => 'Mayor General o Vicealmirante',
+                                //     'General de Brigada o Contralmirante' => 'General de Brigada o Contralmirante',
+                                //     'Coronel o Capitán de Navío' => 'Coronel o Capitán de Navío',
+                                //     'Teniente Coronel o Capitán de Fragata' => 'Teniente Coronel o Capitán de Fragata',
+                                //     'Mayor o Capitán de Corbeta' => 'Mayor o Capitán de Corbeta',
+                                //     'Capitán o Teniente de Navío' => 'Capitán o Teniente de Navío',
+                                //     'Primer Teniente o Teniente de Fragata' => 'Primer Teniente o Teniente de Fragata',
+                                //     'Segundo Teniente o Teniente de Corbeta' => 'Segundo Teniente o Teniente de Corbeta',
+                                //     'Sub Oficial' => 'Sub Oficial',
+                                //     'Cadete o Guardiamarina' => 'Cadete o Guardiamarina',
+                                //     'Sargento Mayor' => 'Sargento Mayor',
+                                //     'Sargento Primero' => 'Sargento Primero',
+                                //     'Sargento de Administración y Contabilidad' => 'Sargento de Administración y Contabilidad',
+                                //     'Sargento' => 'Sargento',
+                                //     'Cabo' => 'Cabo',
+                                //     'Raso Primera Clase/Marinero' => 'Raso Primera Clase/Marinero',
+                                // ])
+                                // ->label('Rango')
+                                // ->searchable()
+                                // ->visible(fn (Get $get): bool => $get('military')),
                                 TextInput::make('phone')->numeric()->label('Teléfono'),
                                 TextInput::make('age')->numeric()->label('Edad'),
                                 Select::make('sexo')->label('Genero')
@@ -107,7 +146,7 @@ class PatientsResource extends Resource
                                     'O+' => 'O+',
                                     'O-' => 'O-',
                                 ])
-                                ->label('Sangre')
+                                ->label('Tipo de sangre')
                                 ->searchable(),
                                 Textarea::make('address')->label('Dirección'),
                             ])

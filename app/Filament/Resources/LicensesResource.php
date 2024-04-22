@@ -50,6 +50,10 @@ class LicensesResource extends Resource
                     Textarea::make('diagnostic')->required()->label('Diagnóstico'),
                 ]),
                 Section::make()
+                ->schema([
+                    Textarea::make('note')->required()->label('Nota'),
+                ]),
+                Section::make()
                 ->columns(3)
                 ->schema([
                     DatePicker::make('date_start')->required()->label('Fecha de inicio')

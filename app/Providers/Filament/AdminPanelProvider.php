@@ -34,6 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
+            ->topNavigation()
             ->darkMode(false)
             ->brandLogo(fn () => view('filament.components.logo'))
             ->brandLogoHeight('11rem')

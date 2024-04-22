@@ -12,7 +12,7 @@ class ARD
 
     public function __construct()
     {
-        $this->client = Http::baseUrl('https://api.cedulado.microslab.com.do/api/')
+        $this->client = Http::baseUrl('http://172.20.16.233:7075/api/AsignarArma/Personal')
             ->withHeaders([
                 'Content-Type' => 'application/json',
             ]);
@@ -23,7 +23,7 @@ class ARD
         try {
 
             $response = $this->client->get(
-                'cedulado/'.$identification
+                '?nombre=m7&status=A&cedula='.$identification
             )->json();
 
             return $response;

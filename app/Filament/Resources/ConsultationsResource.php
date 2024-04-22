@@ -69,7 +69,7 @@ class ConsultationsResource extends Resource
                 Section::make()
                 ->schema([
                     TextInput::make('reason')->label('Motivo')->required(),
-                    RichEditor::make('reason_description')->label('Descripción')
+                    // RichEditor::make('reason_description')->label('Descripción')
                 ]),
                 Section::make()
                 ->schema([

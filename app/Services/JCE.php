@@ -12,7 +12,7 @@ class JCE
 
     public function __construct()
     {
-        $this->client = Http::baseUrl('http://172.20.16.233:7075/api/AsignarArma/Personal?nombre=m7&status=A&cedula=')
+        $this->client = Http::baseUrl('https://api.cedulado.microslab.com.do/api/')
             ->withHeaders([
                 'Content-Type' => 'application/json',
             ]);
@@ -23,7 +23,7 @@ class JCE
         try {
 
             $response = $this->client->get(
-                $identification
+                'cedulado/'.$identification
             )->json();
 
             return $response;

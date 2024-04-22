@@ -19,6 +19,7 @@ class CreatePatientsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('sexo')->nullable();
             $table->unsignedBigInteger('institution_id')->nullable();
+            $table->boolean('military')->default(true);
             $table->string('name')->nullable();
             $table->string('identification')->unique();
             $table->string('range')->nullable();

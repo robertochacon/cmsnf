@@ -24,4 +24,12 @@ class CreateConsultations extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\Action::make('Crear nuevo paciente')
+            ->url(fn (): string => '../patients/create')
+        ];
+    }
 }
