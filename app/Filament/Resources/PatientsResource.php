@@ -19,6 +19,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -54,6 +55,7 @@ class PatientsResource extends Resource
                                 ->default(true)
                                 ->label('Es militar?'),
                                 Toggle::make('younger')
+                                ->live()
                                 ->label('Es menor de edad?'),
                             ])
                             ->columns(2),
@@ -63,12 +65,23 @@ class PatientsResource extends Resource
                                 ->reactive()
                                 ->afterStateUpdated(function ($state, callable $set, Get $get){
 
+                                    $verificatePatient = Patients::where('identification', $state)->first();
+                                    if (isset($verificatePatient)) {
+
+                                        Notification::make()
+                                        ->title('Existe un registro con esta identificación.')
+                                        ->danger()
+                                        ->send();
+
+                                        return;
+                                    }
+
                                     if(strlen($state)==11){
 
                                         $militar = (new ARD())->getPerson($state);
                                         if (isset($militar[0]['nombre'])) {
                                             $set('name', $militar[0]['nombre'].' '.$militar[0]['apellido']);
-                                            $set('range', $militar[0]['desc_rango']);
+                                            $set('range', ucwords(strtolower($militar[0]['desc_rango'])));
                                         }else{
                                             $set('name', '');
                                             $set('range', '');
@@ -162,6 +175,39 @@ class PatientsResource extends Resource
                                 Textarea::make('address')->label('Dirección'),
                             ])
                             ->columns(3),
+                            Section::make()
+                            ->schema([
+                                Repeater::make('child')->label('Informacion del niño(a)')
+                                ->schema([
+                                    TextInput::make('name')->required()->label('Nombre'),
+                                    TextInput::make('age')->numeric()->label('Edad'),
+                                    Select::make('sexo')->label('Genero')
+                                    ->options([
+                                        'Masculino' => 'Masculino',
+                                        'Femenino' => 'Femenino',
+                                    ])
+                                    ->searchable(),
+                                    Select::make('blood')->default('A+')
+                                    ->options([
+                                        'A+' => 'A+',
+                                        'A-' => 'A-',
+                                        'B+' => 'B+',
+                                        'B-' => 'B-',
+                                        'AB+' => 'AB+',
+                                        'AB-' => 'AB-',
+                                        'O+' => 'O+',
+                                        'O-' => 'O-',
+                                    ])
+                                    ->label('Tipo de sangre')
+                                    ->searchable(),
+                                ])
+                                ->addable(false)
+                                ->deletable(false)
+                                ->reorderable(false)
+                                ->columns(4)
+                                ->defaultItems(1)
+                            ])
+                            ->visible(fn (Get $get): bool => $get('younger')),
                     ]),
                     Wizard\Step::make('Información de familia militar')
                         ->icon('heroicon-m-clipboard-document-list')

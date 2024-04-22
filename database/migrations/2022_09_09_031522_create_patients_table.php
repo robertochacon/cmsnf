@@ -20,6 +20,7 @@ class CreatePatientsTable extends Migration
             $table->string('sexo')->nullable();
             $table->unsignedBigInteger('institution_id')->nullable();
             $table->boolean('military')->default(true);
+            $table->boolean('younger')->default(false);
             $table->string('name')->nullable();
             $table->string('identification')->unique();
             $table->string('range')->nullable();
@@ -27,6 +28,7 @@ class CreatePatientsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('blood')->nullable();
+            $table->json('child')->nullable();
             $table->json('military_family')->nullable();
             $table->json('history')->nullable();
             $table->enum('status',['Activo','Inactivo'])->default('Activo');
