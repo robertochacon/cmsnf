@@ -51,7 +51,7 @@ class ConsultationsResource extends Resource
                     }),
                     // Hidden::make('identification'),
                     TextInput::make('name')->readOnly()->label('Nombre'),
-                    Select::make('status')->label('Estado')
+                    Select::make('status')->label('Estado de consulta')
                     ->default('Pendiente')
                     ->options([
                         'Pendiente' => 'Pendiente',
@@ -69,15 +69,15 @@ class ConsultationsResource extends Resource
                 Section::make()
                 ->schema([
                     TextInput::make('reason')->label('Motivo')->required(),
-                    // RichEditor::make('reason_description')->label('Descripción')
                 ]),
                 Section::make()
                 ->schema([
                     RichEditor::make('hea')->label('Historia de la enfermedad actual'),
-                    RichEditor::make('physical_exam')->label('Examen fisico'),
+                    RichEditor::make('physical_exam')->label('Examen fisico')->default('<b>Cabeza:</b><br><br> <b>Tórax:</b><br><br> <b>Abdomen:</b><br><br> <b>Extremidades:</b><br>'),
                     RichEditor::make('complementary_studies')->label('Estudios complentarios'),
                     RichEditor::make('diagnosis')->label('Diagnóstico'),
                     RichEditor::make('treatment')->label('Tratamiento'),
+                    RichEditor::make('counter_referral')->label('Contra referimiento'),
                     Select::make('transfer')
                     ->label('Transferir a')
                     ->options(User::where('type','doctor')->get()->pluck('name', 'id'))

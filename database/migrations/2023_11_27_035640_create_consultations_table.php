@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('fc')->nullable();
             $table->string('fr')->nullable();
             $table->string('reason')->nullable();
-            $table->longText('reason_description')->nullable();
+            $table->longText('counter_referral')->nullable();
             $table->longText('hea')->nullable();
             $table->longText('physical_exam')->nullable();
             $table->longText('diagnosis')->nullable();

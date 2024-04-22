@@ -67,6 +67,7 @@ class EmergenciesResource extends Resource
                     RichEditor::make('laboratory')->label('Laboratorio/Imagen'),
                     RichEditor::make('diagnosis')->label('Diagnóstico'),
                     RichEditor::make('medicine')->label('Medicamentos suministrados'),
+                    RichEditor::make('pending')->label('Datos pendientes'),
                 ])->columns(2),
                 Section::make()
                 ->schema([

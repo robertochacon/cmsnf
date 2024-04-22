@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LicensesResource\Pages;
 use App\Models\Licenses;
+use App\Services\JCE;
 use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
@@ -39,7 +40,22 @@ class LicensesResource extends Resource
                 Section::make()
                 ->columns(3)
                 ->schema([
-                    TextInput::make('identification')->required()->label('Identificación'),
+                    TextInput::make('identification')->required()->label('Identificación')                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $set, Get $get){
+
+                        if(strlen($state)==11){
+                            $persona = (new JCE())->getPerson($state);
+                            if (isset($persona)) {
+                                if (!isset($persona['status'])) {
+                                    $set('name', $persona['nombre'].' '.$persona['apellidos']);
+                                }else{
+                                    $set('name', '');
+                                }
+                            }
+                        }
+
+                    }),
                     TextInput::make('name')->required()->label('Nombre'),
                     TextInput::make('phone')->numeric()->required()->label('Teléfono'),
                 ]),

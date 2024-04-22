@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PaymentsResource\Pages;
 use App\Models\Insurances;
 use App\Models\Payments;
+use App\Services\JCE;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -34,7 +35,22 @@ class PaymentsResource extends Resource
         return $form
             ->schema([
                 //
-                TextInput::make('identification')->numeric()->required()->label('Identificación'),
+                TextInput::make('identification')->required()->label('Identificación')                    ->required()
+                ->reactive()
+                ->afterStateUpdated(function ($state, callable $set, Get $get){
+
+                    if(strlen($state)==11){
+                        $persona = (new JCE())->getPerson($state);
+                        if (isset($persona)) {
+                            if (!isset($persona['status'])) {
+                                $set('name', $persona['nombre'].' '.$persona['apellidos']);
+                            }else{
+                                $set('name', '');
+                            }
+                        }
+                    }
+
+                }),
                 TextInput::make('name')->required()->label('Nombre'),
                 RichEditor::make('description')->label('Descripción')
                     ->columnSpan('full'),

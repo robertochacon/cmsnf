@@ -101,32 +101,43 @@ class PatientsResource extends Resource
                                 ->options(Institutions::all()->pluck('name', 'id'))
                                 ->searchable()
                                 ->visible(fn (Get $get): bool => $get('military')),
-                                TextInput::make('range')->label('Rango')
-                                ->visible(fn (Get $get): bool => $get('military')),
-                                // Select::make('range')
-                                // ->options([
-                                //     'No aplica' => 'No aplica',
-                                //     'Teniente General o Almirante' => 'Teniente General o Almirante',
-                                //     'Mayor General o Vicealmirante' => 'Mayor General o Vicealmirante',
-                                //     'General de Brigada o Contralmirante' => 'General de Brigada o Contralmirante',
-                                //     'Coronel o Capitán de Navío' => 'Coronel o Capitán de Navío',
-                                //     'Teniente Coronel o Capitán de Fragata' => 'Teniente Coronel o Capitán de Fragata',
-                                //     'Mayor o Capitán de Corbeta' => 'Mayor o Capitán de Corbeta',
-                                //     'Capitán o Teniente de Navío' => 'Capitán o Teniente de Navío',
-                                //     'Primer Teniente o Teniente de Fragata' => 'Primer Teniente o Teniente de Fragata',
-                                //     'Segundo Teniente o Teniente de Corbeta' => 'Segundo Teniente o Teniente de Corbeta',
-                                //     'Sub Oficial' => 'Sub Oficial',
-                                //     'Cadete o Guardiamarina' => 'Cadete o Guardiamarina',
-                                //     'Sargento Mayor' => 'Sargento Mayor',
-                                //     'Sargento Primero' => 'Sargento Primero',
-                                //     'Sargento de Administración y Contabilidad' => 'Sargento de Administración y Contabilidad',
-                                //     'Sargento' => 'Sargento',
-                                //     'Cabo' => 'Cabo',
-                                //     'Raso Primera Clase/Marinero' => 'Raso Primera Clase/Marinero',
-                                // ])
-                                // ->label('Rango')
-                                // ->searchable()
+                                // TextInput::make('range')->label('Rango')
                                 // ->visible(fn (Get $get): bool => $get('military')),
+                                Select::make('range')
+                                ->options([
+                                    'No aplica' => 'No aplica',
+                                    'Teniente General' => 'Teniente General',
+                                    'Almirante' => 'Almirante',
+                                    'Mayor General' => 'Mayor General',
+                                    'Vicealmirante' => 'Vicealmirante',
+                                    'General de Brigada' => 'General de Brigada',
+                                    'Contralmirante' => 'Contralmirante',
+                                    'Coronel' => 'Coronel',
+                                    'Capitán de Navío' => 'Capitán de Navío',
+                                    'Teniente Coronel' => 'Teniente Coronel',
+                                    'Capitán de Fragata' => 'Capitán de Fragata',
+                                    'Mayor' => 'Mayor',
+                                    'Capitán de Corbeta' => 'Capitán de Corbeta',
+                                    'Capitán' => 'Capitán',
+                                    'Teniente de Navío' => 'Teniente de Navío',
+                                    'Primer Teniente' => 'Primer Teniente',
+                                    'Teniente de Fragata' => 'Teniente de Fragata',
+                                    'Segundo Teniente' => 'Segundo Teniente',
+                                    'Teniente de Corbeta' => 'Teniente de Corbeta',
+                                    'Sub Oficial' => 'Sub Oficial',
+                                    'Cadete' => 'Cadete',
+                                    'Guardiamarina' => 'Guardiamarina',
+                                    'Sargento Mayor' => 'Sargento Mayor',
+                                    'Sargento Primero' => 'Sargento Primero',
+                                    'Sargento de Administración y Contabilidad' => 'Sargento de Administración y Contabilidad',
+                                    'Sargento' => 'Sargento',
+                                    'Cabo' => 'Cabo',
+                                    'Raso Primera Clase' => 'Raso Primera Clase',
+                                    'Marinero Auxiliar' => 'Marinero Auxiliar',
+                                ])
+                                ->label('Rango')
+                                ->searchable()
+                                ->visible(fn (Get $get): bool => $get('military')),
                                 TextInput::make('phone')->numeric()->label('Teléfono'),
                                 TextInput::make('age')->numeric()->label('Edad'),
                                 Select::make('sexo')->label('Genero')
