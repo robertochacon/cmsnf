@@ -169,7 +169,7 @@ class PatientsResource extends Resource
                                     'AB-' => 'AB-',
                                     'O+' => 'O+',
                                     'O-' => 'O-',
-                                ])
+                                ])->visible(fn (Get $get): bool => !$get('younger'))
                                 ->label('Tipo de sangre')
                                 ->searchable(),
                                 Textarea::make('address')->label('Dirección'),

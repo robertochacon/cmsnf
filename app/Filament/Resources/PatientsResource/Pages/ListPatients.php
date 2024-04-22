@@ -37,6 +37,9 @@ class ListPatients extends ListRecords
             'Civiles' => Tab::make()
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('military', false))
                 ->badge(Patients::query()->where('military',false)->count()),
+            'Menores de edad' => Tab::make()
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('younger', true))
+                ->badge(Patients::query()->where('younger',true)->count()),
         ];
     }
 }
