@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Models\Institutions;
 use App\Models\Order;
 use App\Models\Partner;
+use App\Models\Patients;
 use Illuminate\Http\Request;
 use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
@@ -53,13 +55,14 @@ class DownloadPdfController extends Controller
         return $invoice->stream();
     }
 
-    public function patient(int $patient)
+    public function patient(int $id)
     {
+        $patient = Patients::where("id", $id)->first();
+        $institution = Institutions::where("id", $patient->institution_id)->first();
+
         $customer = new Buyer([
-            'name'          => 'John Doe',
-            'custom_fields' => [
-                'email' => 'test@example.com',
-            ],
+            'patient' => $patient,
+            'institution' => $institution,
         ]);
 
         $item = InvoiceItem::make('Service 1')->pricePerUnit(2);
