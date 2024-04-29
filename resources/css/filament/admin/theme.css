@@ -1,0 +1,23 @@
+@import '/vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+.fi-topbar > nav {
+    background-color: #D6DBDF !important;
+}
+
+.fi-wi-stats-overview-stat {
+    background-color: #D6DBDF !important;
+}
+
+/* .fi-ta-header-toolbar {
+    background-color: #D6DBDF !important;
+} */
+
+.fi-tabs {
+    background-color: #D6DBDF !important;
+}
+
+.fi-header-heading, .fi-ta-table thead {
+    background-color: #D6DBDF !important;
+}
