@@ -10,14 +10,14 @@
     background-color: #D6DBDF !important;
 }
 
-/* .fi-ta-header-toolbar {
-    background-color: #D6DBDF !important;
-} */
-
 .fi-tabs {
     background-color: #D6DBDF !important;
 }
 
-.fi-header-heading, .fi-ta-table thead {
+.fi-header-heading {
+    color: #2563eb !important;
+}
+
+.fi-ta-table thead {
     background-color: #D6DBDF !important;
 }
