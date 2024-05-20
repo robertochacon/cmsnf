@@ -40,7 +40,7 @@ class LicensesResource extends Resource
                 Section::make()
                 ->columns(3)
                 ->schema([
-                    TextInput::make('identification')->required()->label('Identificación')                    ->required()
+                    TextInput::make('identification')->required()->label('Número de Cédula')                    ->required()
                     ->reactive()
                     ->afterStateUpdated(function ($state, callable $set, Get $get){
 
@@ -115,7 +115,7 @@ class LicensesResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('identification')->label('Identificacion')
+                TextColumn::make('identification')->label('Número de Cédula')
                 ->searchable(),
                 TextColumn::make('name')->label('Nombre')
                 ->searchable(),

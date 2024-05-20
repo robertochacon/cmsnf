@@ -61,7 +61,7 @@ class PatientsResource extends Resource
                             ->columns(2),
                             Section::make()
                             ->schema([
-                                TextInput::make('identification')->required()->label('Identificación')                    ->required()
+                                TextInput::make('identification')->required()->label('Número de Cédula')                    ->required()
                                 ->reactive()
                                 ->afterStateUpdated(function ($state, callable $set, Get $get){
 
@@ -286,7 +286,7 @@ class PatientsResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('identification')->label('Identificación')
+                TextColumn::make('identification')->label('Número de Cédula')
                 ->searchable(),
                 TextColumn::make('name')->label('Nombre')
                 ->searchable(),

@@ -38,7 +38,7 @@ class ConsultationsResource extends Resource
             ->schema([
                 Section::make('Información del paciente')
                 ->schema([
-                    Select::make('patient_id')->label('Buscar paciente por identificación')
+                    Select::make('patient_id')->label('Buscar paciente por cédula')
                     ->options(Patients::all()->pluck('identification', 'id'))
                     ->searchable()
                     ->reactive()

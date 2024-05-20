@@ -37,7 +37,7 @@ class EmergenciesResource extends Resource
             ->schema([
                 Section::make('Información del paciente')
                 ->schema([
-                    Select::make('patient_id')->label('Buscar paciente por identificación')
+                    Select::make('patient_id')->label('Buscar paciente por cédula')
                     ->options(Patients::all()->pluck('identification', 'id'))
                     ->searchable()
                     ->reactive()
@@ -95,7 +95,7 @@ class EmergenciesResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('identification')->label('Identificación')
+                TextColumn::make('identification')->label('Número de Cédula')
                 ->searchable(),
                 TextColumn::make('name')->label('Nombre de paciente')
                 ->searchable(),
