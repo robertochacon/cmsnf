@@ -23,7 +23,7 @@ class ARD
         try {
 
             $response = $this->client->get(
-                '?nombre=m7&status=A&cedula='.$identification
+                '?status=A&cedula='.$identification
             )->json();
 
             return $response;
