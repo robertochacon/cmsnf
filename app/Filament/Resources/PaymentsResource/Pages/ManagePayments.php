@@ -16,7 +16,7 @@ class ManagePayments extends ManageRecords
     {
         return [
             Actions\CreateAction::make()->createAnother(false)->label('Nuevo Pago')
-            ->modalHeading('Crear Pago')
+            ->modalHeading('Nuevo registro')
             ->mutateFormDataUsing(function (array $data): array {
                 $data['user_id'] = auth()->id();
                 return $data;

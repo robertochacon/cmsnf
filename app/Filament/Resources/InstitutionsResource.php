@@ -30,6 +30,7 @@ class InstitutionsResource extends Resource
             ->schema([
                 //
                 TextInput::make('name')->required()->label('Nombre'),
+                TextInput::make('siglas')->required()->label('Siglas'),
                 TextInput::make('phone')->label('Teléfono'),
                 Toggle::make('status')->label('Estado')
             ]);
@@ -42,6 +43,8 @@ class InstitutionsResource extends Resource
                 //
                 TextColumn::make('name')->label('Nombre')
                 ->searchable(),
+                TextColumn::make('siglas')->label('Siglas')
+                ->searchable(),
                 // TextColumn::make('phone')->default('N/A'),
                 // TextColumn::make('created_at')->since(),
                 ToggleColumn::make('status')->label('Creado')
@@ -50,8 +53,10 @@ class InstitutionsResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label('Editar'),
-                Tables\Actions\DeleteAction::make()->label('Eliminar'),
+                Tables\Actions\EditAction::make()->label('Editar')
+                ->modalHeading('Editar registro'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar')
+                ->modalHeading('¿Realmente quieres eliminar este registro?'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -16,7 +16,8 @@ class ManageDepartments extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->createAnother(false)->label('Nueva Area'),
+            Actions\CreateAction::make()->createAnother(false)->label('Nueva Area')
+            ->modalHeading('Nuevo registro'),
         ];
     }
 }

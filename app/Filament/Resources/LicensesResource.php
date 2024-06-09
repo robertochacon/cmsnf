@@ -143,7 +143,8 @@ class LicensesResource extends Resource
                 ->url(fn(Licenses $record) => route('licenses.pdf.download', $record))
                 ->openUrlInNewTab(),
                 Tables\Actions\EditAction::make()->label('Editar'),
-                Tables\Actions\DeleteAction::make()->label('Eliminar'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar')
+                ->modalHeading('¿Realmente quieres eliminar este registro?'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

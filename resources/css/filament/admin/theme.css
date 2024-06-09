@@ -2,6 +2,10 @@
 
 @config 'tailwind.config.js';
 
+.fi-body{
+    background: #adbcdc;
+}
+
 .fi-topbar > nav {
     background-color: #D6DBDF !important;
 }
@@ -21,3 +25,8 @@
 .fi-ta-table thead {
     background-color: #D6DBDF !important;
 }
+
+/* .fi-section */
+/* .grid {
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2) !important;
+} */

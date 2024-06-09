@@ -28,12 +28,14 @@ class TotalesOverview extends BaseWidget
                 ->description('Total de registros de pacientes')
                 ->descriptionIcon('heroicon-m-users')
                 ->url("patients_report")
+                ->openUrlInNewTab()
                 ->color('info')
                 ->chart([1,1]),
             Stat::make('Total consultas', $consultations)
                 ->description('Total de registros de consultas')
                 ->descriptionIcon('heroicon-m-clipboard-document-list')
                 ->url("consultations_report")
+                ->openUrlInNewTab()
                 ->color('info')
                 ->chart([1,1]),
             Stat::make('Total prescripciones', $prescriptions)
@@ -45,18 +47,21 @@ class TotalesOverview extends BaseWidget
                 ->description('Total de registros de emergencias')
                 ->descriptionIcon('heroicon-m-document-plus')
                 ->url("emergencies_report")
+                ->openUrlInNewTab()
                 ->color('info')
                 ->chart([1,1]),
             Stat::make('Total de licencias', $licenses)
                 ->description('Total de registros de licencias')
                 ->descriptionIcon('heroicon-m-clipboard-document-list')
                 ->url("licenses_report")
+                ->openUrlInNewTab()
                 ->color('info')
                 ->chart([1,1]),
             Stat::make('Total de pagos', $payments)
                 ->description('Total de registros de pagos')
                 ->descriptionIcon('heroicon-m-currency-dollar')
                 ->url("payments_report")
+                ->openUrlInNewTab()
                 ->color('info')
                 ->chart([1,1]),
         ];

@@ -66,8 +66,10 @@ class ServicesResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()
+                ->modalHeading('Editar registro'),
+                Tables\Actions\DeleteAction::make()
+                ->modalHeading('¿Realmente quieres eliminar este registro?'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -157,7 +157,8 @@ class UsersResource extends Resource
                 //     $user->verified = false;
                 //     $user->save();
                 // }),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                ->modalHeading('¿Realmente quieres eliminar este registro?'),
 
             ])
             ->bulkActions([

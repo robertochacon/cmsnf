@@ -48,8 +48,10 @@ class SpecialtiesResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label('Editar'),
-                Tables\Actions\DeleteAction::make()->label('Eliminar'),
+                Tables\Actions\EditAction::make()->label('Editar')
+                ->modalHeading('Editar registro'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar')
+                ->modalHeading('¿Realmente quieres eliminar este registro?'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

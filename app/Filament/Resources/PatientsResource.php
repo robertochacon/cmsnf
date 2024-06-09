@@ -61,28 +61,31 @@ class PatientsResource extends Resource
                             ->columns(2),
                             Section::make()
                             ->schema([
-                                TextInput::make('identification')->required()->label('Número de Cédula')                    ->required()
+                                TextInput::make('identification')
+                                ->required()
+                                ->label(function (callable $get) {
+                                    return $get('loading') ? 'Número de Cédula (Cargando...)' : 'Número de Cédula';
+                                })
                                 ->reactive()
-                                ->afterStateUpdated(function ($state, callable $set, Get $get){
+                                ->afterStateUpdated(function ($state, callable $set, Get $get) {
+                                    $set('loading', true);
 
                                     $verificatePatient = Patients::where('identification', $state)->first();
                                     if (isset($verificatePatient)) {
-
                                         Notification::make()
-                                        ->title('Existe un registro con esta identificación.')
-                                        ->danger()
-                                        ->send();
-
+                                            ->title('Existe un registro con esta identificación.')
+                                            ->danger()
+                                            ->send();
+                                        // $set('loading', false); // Indicar que el proceso de carga ha terminado
                                         return;
                                     }
 
-                                    if(strlen($state)==11){
-
+                                    if (strlen($state) == 11) {
                                         $militar = (new ARD())->getPerson($state);
                                         if (isset($militar[0]['nombre'])) {
                                             $set('name', $militar[0]['nombre'].' '.$militar[0]['apellido']);
                                             $set('range', ucwords(strtolower($militar[0]['desc_rango'])));
-                                        }else{
+                                        } else {
                                             $set('name', '');
                                             $set('range', '');
                                         }
@@ -93,10 +96,10 @@ class PatientsResource extends Resource
                                                 if (!$get('military')) {
                                                     $set('name', $persona['nombre'].' '.$persona['apellidos']);
                                                 }
-                                                $set('sexo', $persona['sexo']=='M'?'Masculino':'Femenino');
+                                                $set('sexo', $persona['sexo'] == 'M' ? 'Masculino' : 'Femenino');
                                                 $set('age', $persona['edad']);
                                                 $set('address', $persona['lugarNacimiento']);
-                                            }else{
+                                            } else {
                                                 if (!$get('military')) {
                                                     $set('name', '');
                                                 }
@@ -105,9 +108,9 @@ class PatientsResource extends Resource
                                                 $set('address', '');
                                             }
                                         }
-
                                     }
 
+                                    // $set('loading', false);
                                 }),
                                 TextInput::make('name')->required()->label('Nombre'),
                                 Select::make('institution_id')->label('Institución')
@@ -301,7 +304,8 @@ class PatientsResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->label('Editar'),
-                Tables\Actions\DeleteAction::make()->label('Eliminar'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar')
+                ->modalHeading('¿Realmente quieres eliminar este registro?'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

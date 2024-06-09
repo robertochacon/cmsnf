@@ -15,7 +15,8 @@ class ManageInstitutions extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->createAnother(false)->label('Nueva Institución'),
+            Actions\CreateAction::make()->createAnother(false)->label('Nueva Institución')
+            ->modalHeading('Nuevo registro'),
         ];
     }
 }

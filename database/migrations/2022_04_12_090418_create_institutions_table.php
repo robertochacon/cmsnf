@@ -16,6 +16,7 @@ class CreateInstitutionsTable extends Migration
         Schema::create('institutions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
+            $table->string('siglas')->nullable();
             $table->string('phone')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
