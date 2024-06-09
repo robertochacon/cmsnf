@@ -78,12 +78,10 @@ class DownloadPdfController extends Controller
 
     public function patients_report()
     {
-        $patient = Patients::get();
-        // $institution = Institutions::where("id", $patient->institution_id)->first();
+        $patients = Patients::get();
 
         $customer = new Buyer([
-            'patient' => $patient,
-            // 'institution' => $institution,
+            'patients' => $patients,
         ]);
 
         $item = InvoiceItem::make('Service 1')->pricePerUnit(2);
@@ -91,6 +89,7 @@ class DownloadPdfController extends Controller
         $invoice = Invoice::make()
             ->buyer($customer)
             ->addItem($item)
+            ->logo(public_path('vendor/invoices/logo.png'))
             ->template('patients_report');
 
         return $invoice->stream();
