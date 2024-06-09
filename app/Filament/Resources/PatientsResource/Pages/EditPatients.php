@@ -20,7 +20,8 @@ class EditPatients extends EditRecord
             Actions\Action::make('Generar reporte')
             ->color('warning')
             ->url(fn (): string => url($this->getRecord()->id.'/patient')),
-            Actions\DeleteAction::make()->label('Eliminar'),
+            Actions\DeleteAction::make()->label('Eliminar')
+            ->visible(fn ($record) => $record->can_edit),
         ];
     }
 }

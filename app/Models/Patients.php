@@ -18,6 +18,13 @@ class Patients extends Model
         'user_id', 'sexo', 'institution_id', 'military', 'younger', 'name', 'identification', 'age','phone','range','address','blood','child','military_family','history'
     ];
 
+    protected $appends = ['can_edit'];
+
+    public function getCanEditAttribute()
+    {
+        return $this->user_id == auth()->user()->id || auth()->user()->type === 'admin' ? true : false;
+    }
+
     public function consultations()
     {
     	return $this->hasMany('App\Models\Consultations', 'patient_id');

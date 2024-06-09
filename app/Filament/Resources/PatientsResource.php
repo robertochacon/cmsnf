@@ -59,15 +59,15 @@ class PatientsResource extends Resource
                                 ->label('Es menor de edad?'),
                             ])
                             ->columns(2),
-                            Section::make()
+                            Section::make(fn(Get $get) => $get('younger') ? 'Información del tutor' : 'Información personal')
+                            ->description(fn(Get $get) => $get('loading') ? 'Consultando paciente...' : '')
                             ->schema([
                                 TextInput::make('identification')
                                 ->required()
-                                ->label(function (callable $get) {
-                                    return $get('loading') ? 'Número de Cédula (Cargando...)' : 'Número de Cédula';
-                                })
+                                ->label('Número de Cédula')
                                 ->reactive()
                                 ->afterStateUpdated(function ($state, callable $set, Get $get) {
+
                                     $set('loading', true);
 
                                     $verificatePatient = Patients::where('identification', $state)->first();
@@ -76,7 +76,7 @@ class PatientsResource extends Resource
                                             ->title('Existe un registro con esta identificación.')
                                             ->danger()
                                             ->send();
-                                        // $set('loading', false); // Indicar que el proceso de carga ha terminado
+                                        $set('loading', false);
                                         return;
                                     }
 
@@ -108,9 +108,11 @@ class PatientsResource extends Resource
                                                 $set('address', '');
                                             }
                                         }
+
                                     }
 
-                                    // $set('loading', false);
+                                    $set('loading', false);
+
                                 }),
                                 TextInput::make('name')->required()->label('Nombre'),
                                 Select::make('institution_id')->label('Institución')
@@ -303,8 +305,8 @@ class PatientsResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label('Editar'),
-                Tables\Actions\DeleteAction::make()->label('Eliminar')
+                Tables\Actions\EditAction::make()->label(fn ($record) => $record->can_edit ? 'Editar' : 'Ver'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar')->visible(fn ($record) => $record->can_edit)
                 ->modalHeading('¿Realmente quieres eliminar este registro?'),
             ])
             ->bulkActions([
