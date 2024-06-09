@@ -70,17 +70,25 @@
                     </thead>
                     <tbody>
 
-                      @foreach($invoice->buyer->patients as $key => $value)
+                    @if (count($invoice->buyer->patients) > 1)
+
+                        @foreach($invoice->buyer->patients as $key => $value)
+                            <tr>
+                            <td style="text-align: center;">{{ $key+1 }}</td>
+                            <td>{{ $value["name"] ?? "N/A" }}</td>
+                            <td>{{ $value["identification"] ?? "N/A" }}</td>
+                            <td>{{ $value["range"] ?? "N/A" }}</td>
+                            <td>{{ $value["phone"] ?? "N/A" }}</td>
+                            <td>{{ $value["institution"] ?? "N/A" }}</td>
+                            <td>{{ $value["created_at"]->format('d-m-Y') ?? "N/A" }}</td>
+                            </tr>
+                        @endforeach
+
+                    @else
                         <tr>
-                          <td style="text-align: center;">{{ $key+1 }}</td>
-                          <td>{{ $value["name"] ?? "N/A" }}</td>
-                          <td>{{ $value["identification"] ?? "N/A" }}</td>
-                          <td>{{ $value["range"] ?? "N/A" }}</td>
-                          <td>{{ $value["phone"] ?? "N/A" }}</td>
-                          <td>{{ $value["institution"] ?? "N/A" }}</td>
-                          <td>{{ $value["created_at"]->format('d-m-Y') ?? "N/A" }}</td>
+                            <td colspan="8" style="text-align: center;">Registros no disponibles.</td>
                         </tr>
-                      @endforeach
+                    @endif
 
                     </tbody>
                 </table>
