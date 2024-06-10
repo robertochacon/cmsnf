@@ -12,6 +12,7 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use LaravelDaily\Invoices\Classes\Buyer;
 
 class DownloadPdfController extends Controller
@@ -150,7 +151,10 @@ class DownloadPdfController extends Controller
 
     public function payments_report()
     {
-        $payments = Payments::get();
+        $payments = Payments::select([
+            'payments.*',
+            DB::raw('(SELECT name FROM insurances WHERE insurances.id = payments.insurance_id) as insurance_name')
+        ])->get();
 
         $customer = new Buyer([
             'payments' => $payments,

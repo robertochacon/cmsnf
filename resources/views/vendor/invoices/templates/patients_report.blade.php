@@ -60,7 +60,7 @@
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col" style="width:30%">Nombre</th>
+                        <th scope="col">Nombre</th>
                         <th scope="col">Cédula</th>
                         <th scope="col">Rango</th>
                         <th scope="col">Teléfono</th>

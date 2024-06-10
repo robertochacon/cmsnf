@@ -60,29 +60,31 @@
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        {{-- <th scope="col" style="width:30%">Nombre</th>
+                        <th scope="col">Nombre</th>
                         <th scope="col">Cédula</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">Dias</th>
-                        <th scope="col">Fecha inicio</th>
-                        <th scope="col">Fecha final</th>
-                        <th scope="col">Estado</th> --}}
+                        <th scope="col">Seguro medico</th>
+                        <th scope="col">Pago</th>
+                        <th scope="col">Covertura</th>
+                        <th scope="col">Costo</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Fecha</th>
                       </tr>
                     </thead>
                     <tbody>
 
-                    @if (count($invoice->buyer->payments) > 1)
+                    @if (count($invoice->buyer->payments) > 0)
 
                         @foreach($invoice->buyer->payments as $key => $value)
                             <tr>
                                 <td style="text-align: center;">{{ $key+1 }}</td>
-                                {{-- <td>{{ $value["name"] ?? "N/A" }}</td>
+                                <td>{{ $value["name"] ?? "N/A" }}</td>
                                 <td>{{ $value["identification"] ?? "N/A" }}</td>
-                                <td>{{ $value["phone"] ?? "N/A" }}</td>
-                                <td>{{ $value["days"] ?? "N/A" }}</td>
-                                <td>{{ $value["date_start"] ?? "N/A" }}</td>
-                                <td>{{ $value["date_end"] ?? "N/A" }}</td>
-                                <td>{{ $value["status"] ?? "N/A" }}</td> --}}
+                                <td>{{ $value["insurance_name"] ?? "N/A" }}</td>
+                                <td>{{ $value["type"] ?? "N/A" }}</td>
+                                <td>{{ $value["coverage"]."%" ?? "N/A" }}</td>
+                                <td>{{ number_format($value["cost"],2) ?? "N/A" }}</td>
+                                <td>{{ number_format($value["total"],2) ?? "N/A" }}</td>
+                                <td>{{ $value["created_at"]->format('d-m-Y') ?? "N/A" }}</td>
                             </tr>
                         @endforeach
 
