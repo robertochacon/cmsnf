@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consultations;
+use App\Models\Institutions;
 use App\Models\Licenses;
 use App\Models\Patients;
 use App\Models\Payments;
@@ -66,6 +67,7 @@ class DownloadPdfController extends Controller
         $invoice = Invoice::make()
             ->buyer($customer)
             ->addItem($item)
+            ->logo(public_path('vendor/invoices/logo.png'))
             ->template('patient');
 
         return $invoice->stream();

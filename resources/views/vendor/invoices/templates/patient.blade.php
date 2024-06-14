@@ -38,7 +38,13 @@
         <div>
 
             <center>
-                <h1><b>Información de paciente</b></h1>
+                @if($invoice->logo)
+                    <img src="{{ $invoice->getLogo() }}" alt="logo" height="100">
+                    <h2>DIRECCIÓN GENERAL DE CUERPO MEDICO Y SANIDAD NAVAL, ARD.</h2>
+                @endif
+                <hr>
+                <h2><b>Reporte de paciente</b></h2>
+                <hr>
             </center>
 
             <div style="width: 100%;padding:5px;box-sizing:border-box;">
