@@ -18,18 +18,21 @@
                 color: #212529;
                 text-align: left;
                 background-color: #fff;
-                font-size: 10px;
+                font-size: 12px;
                 margin: 36pt;
             }
 
-            /* .subhead{
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 3px;
             }
-            .subhead p{
-                width: auto;
-            } */
+            th {
+                text-align: center;
+            }
+            td {
+                text-align: left;
+            }
         </style>
     </head>
 
@@ -38,11 +41,55 @@
         <div>
 
             <center>
-                <h1><b>Reporte de consultas</b></h1>
+                @if($invoice->logo)
+                    <img src="{{ $invoice->getLogo() }}" alt="logo" height="100">
+                    <h2>DIRECCIÓN GENERAL DE CUERPO MEDICO Y SANIDAD NAVAL, ARD.</h2>
+                @endif
+                <hr>
+                <h2><b>Reporte de consultas</b></h2>
+                <hr>
             </center>
 
+
+
             <div style="width: 100%;padding:5px;box-sizing:border-box;">
-                @if ($invoice->buyer->patients)
+                @if ($invoice->buyer->consultations)
+
+                <table class="table" style="width:100%">
+                    <caption style="text-align: left;"><h4>Lista de consultas</h4></caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cédula</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Fecha creacion</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                    @if (count($invoice->buyer->consultations) > 0)
+
+                        @foreach($invoice->buyer->consultations as $key => $value)
+                            <tr>
+                            <td style="text-align: center;">{{ $key+1 }}</td>
+                            <td>{{ $value["patient"]["name"] ?? "N/A" }}</td>
+                            <td>{{ $value["patient"]["identification"] ?? "N/A" }}</td>
+                            <td>{{ $value["user"]["name"] ?? "N/A" }}</td>
+                            <td>{{ $value["status"] ?? "N/A" }}</td>
+                            <td>{{ $value["created_at"]->format('d-m-Y') ?? "N/A" }}</td>
+                            </tr>
+                        @endforeach
+
+                    @else
+                        <tr>
+                            <td colspan="8" style="text-align: center;">Registros no disponibles.</td>
+                        </tr>
+                    @endif
+
+                    </tbody>
+                </table>
 
                 @endif
             </div>

@@ -91,6 +91,8 @@ class ConsultationsResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('patient.name')->default('N/A')->label('Nombre')->searchable(),
+                TextColumn::make('patient.identification')->default('N/A')->label('Cédula')->searchable(),
                 TextColumn::make('reason')->default('N/A')->label('Motivo')->searchable(),
                 TextColumn::make('user.name')->default('N/A')->label('Registrado por'),
                 TextColumn::make('status')->label('Estado')

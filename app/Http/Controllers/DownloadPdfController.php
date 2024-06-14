@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Articles;
+use App\Models\Consultations;
 use App\Models\Licenses;
 use App\Models\Patients;
 use App\Models\Payments;
-use Illuminate\Http\Request;
 use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
-use LaravelDaily\Invoices\Classes\Party;
-use Filament\Facades\Filament;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use LaravelDaily\Invoices\Classes\Buyer;
 
@@ -96,7 +92,7 @@ class DownloadPdfController extends Controller
 
     public function consultations_report()
     {
-        $consultations = Emergencies::get();
+        $consultations = Consultations::get();
 
         $customer = new Buyer([
             'consultations' => $consultations,
@@ -107,6 +103,7 @@ class DownloadPdfController extends Controller
         $invoice = Invoice::make()
             ->buyer($customer)
             ->addItem($item)
+            ->logo(public_path('vendor/invoices/logo.png'))
             ->template('consultations_report');
 
         return $invoice->stream();
@@ -125,6 +122,7 @@ class DownloadPdfController extends Controller
         $invoice = Invoice::make()
             ->buyer($customer)
             ->addItem($item)
+            ->logo(public_path('vendor/invoices/logo.png'))
             ->template('emergencies_report');
 
         return $invoice->stream();

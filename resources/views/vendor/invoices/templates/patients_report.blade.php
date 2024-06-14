@@ -70,7 +70,7 @@
                     </thead>
                     <tbody>
 
-                    @if (count($invoice->buyer->patients) > 1)
+                    @if (count($invoice->buyer->patients) > 0)
 
                         @foreach($invoice->buyer->patients as $key => $value)
                             <tr>

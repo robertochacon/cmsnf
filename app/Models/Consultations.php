@@ -20,4 +20,9 @@ class Consultations extends Model
     	return $this->belongsTo('App\Models\User', 'user_id');
     }
 
+    public function patient()
+    {
+    	return $this->belongsTo('App\Models\Patients', 'patient_id');
+    }
+
 }

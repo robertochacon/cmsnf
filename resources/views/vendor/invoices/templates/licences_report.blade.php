@@ -71,7 +71,7 @@
                     </thead>
                     <tbody>
 
-                    @if (count($invoice->buyer->licences) > 1)
+                    @if (count($invoice->buyer->licences) > 0)
 
                         @foreach($invoice->buyer->licences as $key => $value)
                             <tr>
