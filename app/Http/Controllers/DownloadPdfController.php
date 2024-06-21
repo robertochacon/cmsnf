@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consultations;
+use App\Models\Emergencies;
 use App\Models\Institutions;
 use App\Models\Licenses;
 use App\Models\Patients;
