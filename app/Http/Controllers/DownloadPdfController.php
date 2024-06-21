@@ -14,13 +14,13 @@ use LaravelDaily\Invoices\Classes\Buyer;
 
 class DownloadPdfController extends Controller
 {
-    public function license(int $order)
+    public function license(int $patient_id)
     {
+
+        $patient = Patients::where("id", $patient_id)->first();
+
         $customer = new Buyer([
-            'name'          => 'John Doe',
-            'custom_fields' => [
-                'email' => 'test@example.com',
-            ],
+            'patient'          => $patient,
         ]);
 
         $item = InvoiceItem::make('Service 1')->pricePerUnit(2);

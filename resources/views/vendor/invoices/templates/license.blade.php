@@ -41,15 +41,15 @@
             </center>
 
             <div class="subhead">
-                <p style="float:left;"><b style="text-decoration: underline;">Num.</b> 2801/</p>
-                <p style="float: right;">20-08-2023.</p>
+                <p style="float:left;"><b style="text-decoration: underline;">Num. {{ $invoice->buyer->patient->id }}</b></p>
+                <p style="float: right;">{{ $invoice->buyer->patient->created_at->format('d/m/Y') }}</p>
             </div>
 
             <p>
                 <br><br><br>
                 Deli Director General del Cuerpo Médico y Sanidad Naval, ARD.
                 <br><br>
-                Cortesmente, por indicacion de la I.N Psiquatra <b>ANA RUIZ</b> y ARD. EXq• 397-89, le concede licencia Medica por un periodo de (30) dias àl I.C. <b>FRANCISY. DUVERGE MONTES</b>, ARD, S/N "CUERPO MEDICO' ARD., Céd:001-1754266-2, Tel.: 809-802-9192, por presentar como Dx: I) "DEPRESION MAYOR GRAVE" el cual la pasara en la calle 4TA NO. 23 EDIF Eribeth 1, prado oriental, Santo Domingo Este., esta Licencia Medica comienza su erectividad las 08:00 horas del dla de la techa y termina a la misma nora del dia dia 19-09-2023.
+                Cortesmente, por indicacion de <b>{{ Auth::user()->name }}</b> y ARD. EXq• 397-89, le concede licencia Medica por un periodo de ({{ $invoice->buyer->patient->days }}) dias àl I.C. <b>{{ $invoice->buyer->patient->name }}</b>, ARD, S/N "CUERPO MEDICO' ARD., Céd:{{ $invoice->buyer->patient->identification }}, Tel.: {{ $invoice->buyer->patient->phone }}, por presentar como Dx: I) "DEPRESION MAYOR GRAVE" el cual la pasara en {{ $invoice->buyer->patient->address }}, esta Licencia Medica comienza su erectividad las 08:00 horas del dia de la fecha y termina a la misma hora del dia {{ $invoice->buyer->patient->date_end }}.
             </p>
         </div>
 
