@@ -19,7 +19,8 @@ class EditPatients extends EditRecord
             ->url(fn (): string => url('admin/emergencies/create')),
             Actions\Action::make('Generar reporte')
             ->color('warning')
-            ->url(fn (): string => url($this->getRecord()->id.'/patient')),
+            ->url(fn (): string => url($this->getRecord()->id.'/patient'))
+            ->openUrlInNewTab(),
             Actions\DeleteAction::make()->label('Eliminar')
             ->visible(fn ($record) => $record->can_edit),
         ];

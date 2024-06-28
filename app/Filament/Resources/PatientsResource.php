@@ -50,10 +50,6 @@ class PatientsResource extends Resource
                         ->schema([
                             Section::make()
                             ->schema([
-                                Toggle::make('military')
-                                ->live()
-                                ->default(true)
-                                ->label('Es militar?'),
                                 Toggle::make('younger')
                                 ->live()
                                 ->label('Es menor de edad?'),
@@ -62,6 +58,10 @@ class PatientsResource extends Resource
                             Section::make(fn(Get $get) => $get('younger') ? 'Información del tutor' : 'Información personal')
                             ->description(fn(Get $get) => $get('loading') ? 'Consultando paciente...' : '')
                             ->schema([
+                                Toggle::make('military')
+                                ->live()
+                                ->default(true)
+                                ->label('Es militar?'),
                                 TextInput::make('identification')
                                 ->required()
                                 ->label('Número de Cédula')
