@@ -31,7 +31,7 @@ class CashierClousureResource extends Resource
     {
         return $form
             ->schema([
-                Section::make('Información personal')
+                Section::make('Información de cierre')
                     ->schema([
                     Forms\Components\TextInput::make('amount_start')
                         ->label('Monto Inicial')
