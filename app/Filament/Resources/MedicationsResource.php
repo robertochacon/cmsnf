@@ -20,9 +20,9 @@ class MedicationsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Medicamentos';
+    protected static ?string $navigationGroup = 'Farmacia';
 
-    protected static ?string $navigationLabel = 'Medicamentos';
+    protected static ?string $navigationLabel = 'Farmacia';
 
     protected static ?int $navigationSort = 6;
 
@@ -129,6 +129,10 @@ class MedicationsResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('Imprimir')
+                ->icon('heroicon-o-arrow-down-on-square-stack')
+                ->url(fn(Medications $record) => route('licenses.pdf.download', $record))
+                ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

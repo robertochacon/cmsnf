@@ -117,6 +117,10 @@ class CashierClousureResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('Imprimir')
+                ->icon('heroicon-o-arrow-down-on-square-stack')
+                ->url(fn(CashierClosure $record) => route('licenses.pdf.download', $record))
+                ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
