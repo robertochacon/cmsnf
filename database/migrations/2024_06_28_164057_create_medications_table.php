@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('supplier_id')->nullable();
             $table->foreign('supplier_id')->references('id')->on('suppliers');
+            $table->unsignedBigInteger('packaging_id')->nullable();
+            $table->foreign('packaging_id')->references('id')->on('packagings');
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('manufacturer')->nullable();
