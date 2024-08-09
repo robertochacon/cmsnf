@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\MedicationsResource\Pages;
 use App\Filament\Resources\MedicationsResource\RelationManagers;
 use App\Models\Medications;
+use App\Models\Suppliers;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
@@ -63,7 +64,11 @@ class MedicationsResource extends Resource
                             'inbound' => 'Entrada',
                             'outgoing' => 'Salida',
                         ])
-                        ->nullable()
+                        ->nullable(),
+                    Forms\Components\Select::make('supplier_id')
+                        ->options(Suppliers::all()->pluck('name', 'id'))
+                        ->label('Suplidor')
+                        ->searchable(),
                 ])->columns(3);
     }
 
