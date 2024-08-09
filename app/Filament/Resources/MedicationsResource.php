@@ -57,6 +57,14 @@ class MedicationsResource extends Resource
                         ->required(),
                     Forms\Components\TextInput::make('active_substance')
                         ->label('Sustancia activa'),
+                    Forms\Components\Select::make('supplier_id')
+                        ->options(Suppliers::all()->pluck('name', 'id'))
+                        ->label('Suplidor')
+                        ->searchable(),
+                    Forms\Components\Select::make('packaging_id')
+                        ->options(Packagings::all()->pluck('name', 'id'))
+                        ->label('Envace')
+                        ->searchable(),
                     Forms\Components\Textarea::make('storage_conditions')
                         ->label('Condiciones de almacenamiento')
                         ->columnSpanFull(),
@@ -67,14 +75,6 @@ class MedicationsResource extends Resource
                             'outgoing' => 'Salida',
                         ])
                         ->nullable(),
-                    Forms\Components\Select::make('supplier_id')
-                        ->options(Suppliers::all()->pluck('name', 'id'))
-                        ->label('Suplidor')
-                        ->searchable(),
-                    Forms\Components\Select::make('packaging_id')
-                        ->options(Packagings::all()->pluck('name', 'id'))
-                        ->label('Envace')
-                        ->searchable(),
                 ])->columns(3);
     }
 
