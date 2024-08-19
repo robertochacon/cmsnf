@@ -35,6 +35,14 @@ class SuppliersResource extends Resource
                     ->label('Nombre')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('rnc')
+                    ->label('RNC')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('address')
+                    ->label('Dirección')
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('phone')
                     ->label('Telefono')
                     ->tel()
@@ -48,6 +56,12 @@ class SuppliersResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nombre')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('rnc')
+                    ->label('RNC')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('address')
+                    ->label('Dirección')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->label('Telefono')
