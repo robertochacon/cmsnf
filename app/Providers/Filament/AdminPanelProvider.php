@@ -50,7 +50,7 @@ class AdminPanelProvider extends PanelProvider
                             ->directory('images/backgrounds')
                     ),
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            // ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 // Widgets\AccountWidget::class,
             ])
