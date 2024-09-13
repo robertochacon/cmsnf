@@ -21,11 +21,11 @@ class PackagingsResource extends Resource
 
     protected static ?string $navigationGroup = 'Farmacia';
 
-    protected static ?string $modelLabel = 'Envace';
+    protected static ?string $modelLabel = 'Envase';
 
-    protected static ?string $pluralModelLabel = 'Envaces';
+    protected static ?string $pluralModelLabel = 'Envases';
 
-    protected static ?string $navigationLabel = 'Envaces';
+    protected static ?string $navigationLabel = 'Envases';
 
     public static function form(Form $form): Form
     {

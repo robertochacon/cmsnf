@@ -51,7 +51,7 @@ class MedicationsResource extends Resource
                         ->label('Cantidad')
                         ->numeric(),
                     Forms\Components\DatePicker::make('expiry_date')
-                        ->label('Fecha de caducidad'),
+                        ->label('Fecha de vencimiento'),
                     Forms\Components\Toggle::make('prescription_required')
                         ->label('Requiere receta')
                         ->required(),
@@ -63,7 +63,7 @@ class MedicationsResource extends Resource
                         ->searchable(),
                     Forms\Components\Select::make('packaging_id')
                         ->options(Packagings::all()->pluck('name', 'id'))
-                        ->label('Envace')
+                        ->label('Envase')
                         ->searchable(),
                     Forms\Components\Textarea::make('storage_conditions')
                         ->label('Condiciones de almacenamiento')
@@ -104,7 +104,7 @@ class MedicationsResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('expiry_date')
-                    ->label('Fecha de caducidad')
+                    ->label('Fecha de vencimiento')
                     ->date()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('prescription_required')

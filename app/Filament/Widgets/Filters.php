@@ -28,4 +28,9 @@ class Filters extends Widget
             ]);
     }
 
+    public static function canView(): bool
+    {
+        return false;
+    }
+
 }

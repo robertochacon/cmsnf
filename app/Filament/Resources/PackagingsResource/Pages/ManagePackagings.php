@@ -10,7 +10,7 @@ class ManagePackagings extends ManageRecords
 {
     protected static string $resource = PackagingsResource::class;
 
-    protected static ?string $title = 'Envaces';
+    protected static ?string $title = 'Envases';
 
     protected function getHeaderActions(): array
     {
