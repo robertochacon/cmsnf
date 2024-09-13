@@ -25,4 +25,9 @@ class Medications extends Model
         'storage_conditions',
     ];
 
+    public function movements()
+    {
+    	return $this->hasMany('App\Models\Medications_movements', 'medication_id');
+    }
+
 }

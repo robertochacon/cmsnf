@@ -27,7 +27,6 @@ return new class extends Migration
             $table->boolean('prescription_required')->default(false);
             $table->string('active_substance')->nullable();
             $table->text('storage_conditions')->nullable();
-            $table->enum('status', ['inbound','outgoing'])->nullable()->default('inbound');
             $table->timestamps();
         });
     }

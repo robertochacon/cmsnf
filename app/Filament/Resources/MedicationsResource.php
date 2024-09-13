@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MedicationsResource\Pages;
 use App\Filament\Resources\MedicationsResource\RelationManagers;
+use App\Filament\Resources\MedicationsResource\RelationManagers\MedicationsRelationManager;
 use App\Models\Medications;
 use App\Models\Packagings;
 use App\Models\Suppliers;
@@ -68,13 +69,13 @@ class MedicationsResource extends Resource
                     Forms\Components\Textarea::make('storage_conditions')
                         ->label('Condiciones de almacenamiento')
                         ->columnSpanFull(),
-                        Forms\Components\Select::make('status')
-                        ->label('Estado')
-                        ->options([
-                            'inbound' => 'Entrada',
-                            'outgoing' => 'Salida',
-                        ])
-                        ->nullable(),
+                    // Forms\Components\Select::make('status')
+                    //     ->label('Estado')
+                    //     ->options([
+                    //         'inbound' => 'Entrada',
+                    //         'outgoing' => 'Salida',
+                    //     ])
+                    //     ->nullable(),
                 ])->columns(3);
     }
 
@@ -115,13 +116,13 @@ class MedicationsResource extends Resource
                     ->default("N/A")
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                Tables\Columns\SelectColumn::make('status')
-                    ->label('Estado')
-                    ->options([
-                        'inbound' => 'Entrada',
-                        'outgoing' => 'Salida',
-                    ])
-                    ->selectablePlaceholder(false),
+                // Tables\Columns\SelectColumn::make('status')
+                //     ->label('Estado')
+                //     ->options([
+                //         'inbound' => 'Entrada',
+                //         'outgoing' => 'Salida',
+                //     ])
+                //     ->selectablePlaceholder(false),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado')
                     ->default("N/A")
@@ -151,6 +152,13 @@ class MedicationsResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            MedicationsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array
