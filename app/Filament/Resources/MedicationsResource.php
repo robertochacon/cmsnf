@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MedicationsResource\Pages;
 use App\Filament\Resources\MedicationsResource\RelationManagers;
-use App\Filament\Resources\MedicationsResource\RelationManagers\MedicationsRelationManager;
+// use App\Filament\Resources\MedicationsResource\RelationManagers\MedicationsRelationManager;
 use App\Models\Medications;
 use App\Models\Packagings;
 use App\Models\Suppliers;
@@ -26,7 +26,7 @@ class MedicationsResource extends Resource
 
     protected static ?string $navigationGroup = 'Farmacia';
 
-    protected static ?string $navigationLabel = 'Farmacia';
+    protected static ?string $navigationLabel = 'Medicamentos';
 
     protected static ?int $navigationSort = 6;
 
@@ -141,10 +141,10 @@ class MedicationsResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('Imprimir')
-                ->icon('heroicon-o-arrow-down-on-square-stack')
-                ->url(fn(Medications $record) => route('licenses.pdf.download', $record))
-                ->openUrlInNewTab(),
+                // Tables\Actions\Action::make('Imprimir')
+                // ->icon('heroicon-o-arrow-down-on-square-stack')
+                // ->url(fn(Medications $record) => route('licenses.pdf.download', $record))
+                // ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -157,7 +157,7 @@ class MedicationsResource extends Resource
     public static function getRelations(): array
     {
         return [
-            MedicationsRelationManager::class,
+            // MedicationsRelationManager::class,
         ];
     }
 

@@ -27,7 +27,7 @@ class Medications extends Model
 
     public function movements()
     {
-    	return $this->hasMany('App\Models\Medications_movements', 'medication_id');
+    	return $this->hasMany('App\Models\MedicationsMovements', 'medication_id');
     }
 
 }

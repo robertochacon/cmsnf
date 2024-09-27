@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('medication_id')->nullable();
             $table->foreign('medication_id')->references('id')->on('medications');
+            $table->unsignedBigInteger('patient_id')->nullable();
+            $table->foreign('patient_id')->references('id')->on('patients');
             $table->integer('quantity')->nullable();
             $table->enum('status', ['inbound','outgoing'])->nullable()->default('inbound');
             $table->timestamps();

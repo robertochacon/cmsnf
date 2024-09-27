@@ -10,7 +10,7 @@ class ManageMedications extends ManageRecords
 {
     protected static string $resource = MedicationsResource::class;
 
-    protected static ?string $title = 'Entrada y Salida de Medicamentos';
+    protected static ?string $title = 'Medicamentos';
 
     protected function getHeaderActions(): array
     {

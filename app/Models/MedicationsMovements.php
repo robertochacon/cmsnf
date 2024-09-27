@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Medications_movements extends Model
+class MedicationsMovements extends Model
 {
     use HasFactory;
 
@@ -13,6 +13,7 @@ class Medications_movements extends Model
 
     protected $fillable = [
         'medication_id',
+        'patient_id',
         'quantity',
         'status',
     ];
