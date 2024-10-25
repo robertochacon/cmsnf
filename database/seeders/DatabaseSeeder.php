@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             Patients::class,
             Professions::class,
             Specialties::class,
+            Medications::class,
         ]);
     }
 }
