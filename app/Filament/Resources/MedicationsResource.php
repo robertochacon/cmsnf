@@ -24,7 +24,7 @@ class MedicationsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Farmacia';
+    protected static ?string $navigationGroup = 'Mantenimiento';
 
     protected static ?string $navigationLabel = 'Medicamentos';
 

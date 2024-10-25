@@ -20,7 +20,7 @@ class InstitutionsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
-    protected static ?string $navigationGroup = 'Matenimiento';
+    protected static ?string $navigationGroup = 'Mantenimiento';
 
     protected static ?string $navigationLabel = 'Instituciónes';
 

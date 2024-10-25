@@ -21,7 +21,7 @@ class ProfessionsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
-    protected static ?string $navigationGroup = 'Matenimiento';
+    protected static ?string $navigationGroup = 'Mantenimiento';
 
     protected static ?string $title = 'Profesiónes';
 

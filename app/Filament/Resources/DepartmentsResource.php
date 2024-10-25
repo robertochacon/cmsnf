@@ -21,9 +21,8 @@ class DepartmentsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
-    protected static ?string $navigationGroup = 'Matenimiento';
+    protected static ?string $navigationGroup = 'Mantenimiento';
 
-    // protected static ?string $navigationLabel = 'Departamentos';
     protected static ?string $navigationLabel = 'Areas';
 
     protected static bool $shouldRegisterNavigation = true;
