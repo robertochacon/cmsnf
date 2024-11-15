@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('medications_movements', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('medication_id')->nullable();
-            $table->foreign('medication_id')->references('id')->on('medications');
+            $table->json('medication_ids')->nullable();
             $table->unsignedBigInteger('patient_id')->nullable();
             $table->foreign('patient_id')->references('id')->on('patients');
             $table->integer('quantity')->nullable();
-            $table->string('type')->nullable();
+            $table->enum('type',['in','out'])->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });

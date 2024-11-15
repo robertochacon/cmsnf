@@ -10,6 +10,7 @@ use App\Models\Patients;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -36,23 +37,29 @@ class MedicationsMovementsResource extends Resource
             ->schema([
                 Section::make('Información General')
                 ->schema([
-                    Forms\Components\Select::make('medication_id')
-                        ->label('Medicamento')
+                    Forms\Components\Select::make('type')
+                        ->label('Tipo de Movimiento')
+                        ->options([
+                            'in' => 'Entrada',
+                            'out' => 'Salida',
+                        ])
+                        ->reactive(),
+                    Forms\Components\MultiSelect::make('medication_ids')
+                        ->label('Medicamentos')
                         ->options(Medications::all()->pluck('name', 'id'))
                         ->searchable(),
                     Forms\Components\Select::make('patient_id')
                         ->label('Paciente')
                         ->options(Patients::all()->pluck('name', 'id'))
-                        ->searchable(),
+                        ->searchable()
+                        ->visible(fn (Get $get) => $get('type') === 'out'),
                     Forms\Components\TextInput::make('quantity')
                         ->label('Cantidad')
                         ->numeric(),
-                    Forms\Components\TextInput::make('type')
-                        ->label('Tipo de Movimiento'),
                     Forms\Components\Textarea::make('note')
                         ->label('Nota')
                         ->columnSpanFull(),
-                ])->columns(2)
+                ])->columns(4)
             ]);
     }
 
@@ -60,19 +67,18 @@ class MedicationsMovementsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('medication_id')
-                    ->label('ID del Medicamento')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('patient_id')
-                    ->label('ID del Paciente')
-                    ->numeric()
+                Tables\Columns\BadgeColumn::make('medication_ids')
+                    ->label('Medicamentos')
+                    ->getStateUsing(fn ($record) => implode(', ', $record->medication_names)),
+                Tables\Columns\TextColumn::make('patient.name')
+                    ->label('Paciente')
+                    ->default('N/A')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('quantity')
                     ->label('Cantidad')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('type')
+                Tables\Columns\TextColumn::make('type_name')
                     ->label('Tipo de Movimiento')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
