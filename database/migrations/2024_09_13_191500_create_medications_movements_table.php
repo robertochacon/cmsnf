@@ -18,7 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('patient_id')->nullable();
             $table->foreign('patient_id')->references('id')->on('patients');
             $table->integer('quantity')->nullable();
-            $table->enum('status', ['inbound','outgoing'])->nullable()->default('inbound');
+            $table->string('type')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

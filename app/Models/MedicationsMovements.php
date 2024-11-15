@@ -15,7 +15,8 @@ class MedicationsMovements extends Model
         'medication_id',
         'patient_id',
         'quantity',
-        'status',
+        'type',
+        'note',
     ];
 
     public function medication()
