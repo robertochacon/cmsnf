@@ -27,9 +27,9 @@ class MedicationsMovementsResource extends Resource
 
     protected static ?string $modelLabel = 'Movimiento';
 
-    protected static ?string $pluralModelLabel = 'Movimientos';
+    protected static ?string $pluralModelLabel = 'Movimientos de medicamentos';
 
-    protected static ?string $navigationLabel = 'Movimientos';
+    protected static ?string $navigationLabel = 'Movimientos de medicamentos';
 
     public static function form(Form $form): Form
     {
